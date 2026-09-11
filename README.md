@@ -11,3 +11,16 @@ dependencies. Edit it and push; GitHub Pages redeploys automatically.
 
 Applicant tracker data is stored in each viewer's own browser (localStorage).
 It is never uploaded and is not shared between people or devices.
+
+## tools/
+
+Utilities written while building this page. Node stdlib only, no dependencies.
+
+| Script | What it does |
+| --- | --- |
+| `build.js` | Wraps the Claude artifact fragment in a full HTML document to produce `index.html`. |
+| `pdftext.js` | Extracts text from a PDF, decoding per-font ToUnicode CMaps and recursing into Form XObjects. Used to read the Team Handbook. |
+| `xlsx.js` | Dumps an unpacked .xlsx to readable rows. |
+| `xlsxlib.js` | Writes a multi-sheet .xlsx (stored-ZIP, inline strings). |
+
+Usage: `node tools/pdftext.js input.pdf output.txt`
