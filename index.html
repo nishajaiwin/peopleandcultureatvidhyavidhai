@@ -349,10 +349,19 @@
   .ld-stat .fig{font-family:var(--display);font-size:30px;line-height:1;color:var(--accent-deep)}
   .ld-stat .lab{font-size:11.5px;color:var(--ink-soft);line-height:1.35}
   .ld-controls{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-bottom:16px}
-  .ld-search{display:flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--line);border-radius:3px;padding:0 12px;flex:1 1 230px;min-width:0}
-  .ld-search svg{width:14px;height:14px;flex:0 0 auto;color:var(--grey)}
-  .ld-search input{border:0;background:none;font:inherit;font-size:13px;color:var(--ink);padding:10px 0;width:100%;min-width:0}
-  .ld-search input:focus{outline:none}
+  .ld-pick{position:relative;display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:3px;padding:0 12px;flex:1 1 300px;min-width:0}
+  .ld-pick:focus-within{border-color:var(--accent)}
+  .ld-pick-lab{font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);flex:0 0 auto}
+  .ld-pick select{appearance:none;-webkit-appearance:none;border:0;background:none;font:inherit;font-size:13.5px;color:var(--ink);padding:11px 22px 11px 0;width:100%;min-width:0;cursor:pointer}
+  .ld-pick select:focus{outline:none}
+  .ld-pick > svg{width:12px;height:12px;flex:0 0 auto;color:var(--ink-soft);position:absolute;right:12px;pointer-events:none}
+  .ld-prompt{margin:0;padding:22px 20px;background:var(--card);border:1px dashed var(--line);border-radius:3px;font-size:13.5px;color:var(--ink-soft);line-height:1.55}
+  .ld-sum{margin:0 0 14px;font-size:13.5px;color:var(--accent-deep);font-weight:600}
+  .ld-key{margin-top:18px;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
+  .ld-key-item{display:flex;gap:10px;align-items:flex-start;background:var(--card);border:1px solid var(--line);border-radius:3px;padding:14px 16px}
+  .ld-key-item > span{flex:0 0 auto;margin-top:1px}
+  .ld-key-item p{margin:0;font-size:12.5px;color:var(--ink-soft);line-height:1.5}
+  .ld-key-item strong{color:var(--ink)}
   .ld-tabs{display:flex;flex-wrap:wrap;gap:6px}
   .ld-tab{font:inherit;font-size:11.5px;font-weight:600;color:var(--ink-soft);background:var(--card);border:1px solid var(--line);border-radius:3px;padding:7px 12px;cursor:pointer}
   .ld-tab:hover{border-color:var(--accent);color:var(--accent-deep)}
@@ -801,9 +810,38 @@
   <section class="group">
     <div class="group-head"><h2>Course and fellowship register</h2><span>25 people</span></div>
     <div class="ld-controls">
-      <label class="ld-search">
-        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="7.2" cy="7.2" r="4.6"/><path d="M10.6 10.6 14 14" stroke-linecap="round"/></svg>
-        <input type="search" id="ld-filter" placeholder="Find a name or a course" aria-label="Filter the register by name or course">
+      <label class="ld-pick">
+        <span class="ld-pick-lab">Employee</span>
+        <select id="ld-person" aria-label="Choose whose courses to show">
+          <option value="" selected>Choose an employee…</option>
+          <option value="__all">Everyone — all 25 people</option>
+        <option value="Gayathri">Gayathri — 2 courses</option>
+        <option value="Gomathi">Gomathi — 1 course</option>
+        <option value="Johanson">Johanson — 1 course</option>
+        <option value="Juno">Juno — nothing logged</option>
+        <option value="Karunya">Karunya — 1 course</option>
+        <option value="Mahesh Kumar">Mahesh Kumar — 1 course</option>
+        <option value="Mathivathani">Mathivathani — 1 course</option>
+        <option value="Meghna">Meghna — 1 course</option>
+        <option value="Monisha">Monisha — 1 course</option>
+        <option value="Narmadha">Narmadha — nothing logged</option>
+        <option value="Nisha">Nisha — nothing logged</option>
+        <option value="Poomuthu">Poomuthu — nothing logged</option>
+        <option value="Preethi">Preethi — 2 courses</option>
+        <option value="Pushpathy">Pushpathy — nothing logged</option>
+        <option value="Ram">Ram — nothing logged</option>
+        <option value="Rajesh">Rajesh — nothing logged</option>
+        <option value="Ravi Kumar">Ravi Kumar — nothing logged</option>
+        <option value="Regi">Regi — nothing logged</option>
+        <option value="Sabaritha">Sabaritha — 1 course</option>
+        <option value="Saktheeswaran">Saktheeswaran — nothing logged</option>
+        <option value="Saravana Kumar">Saravana Kumar — nothing logged</option>
+        <option value="Satya Moorthy">Satya Moorthy — nothing logged</option>
+        <option value="Sharon">Sharon — 1 course</option>
+        <option value="Vanmathi">Vanmathi — nothing logged</option>
+        <option value="Vidhya">Vidhya — 2 courses</option>
+        </select>
+        <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </label>
       <div class="ld-tabs" role="group" aria-label="Filter by status">
         <button type="button" class="ld-tab is-on" data-st="all">All</button>
@@ -814,46 +852,61 @@
         <button type="button" class="ld-tab" data-st="nil">No entry yet</button>
       </div>
     </div>
-    <div class="rw-wrap">
+    <p class="ld-prompt" id="ld-prompt">Pick a name above to see that course history, or choose <strong>Everyone</strong> for the whole register.</p>
+    <p class="ld-sum" id="ld-sum" hidden></p>
+    <div class="rw-wrap" id="ld-wrap" hidden>
       <table class="rw ld-table">
         <thead><tr>
           <th scope="col">Employee</th><th scope="col">Course or fellowship</th>
           <th scope="col">Source</th><th scope="col">Status</th>
         </tr></thead>
         <tbody id="ld-body">
-          <tr data-name="Gayathri" data-course="Science workshop — APU" data-status="done"><td>Gayathri</td><td>Science workshop — APU</td><td><span class="ld-src">SD</span></td><td><span class="ld-st done">Completed</span></td></tr>
-          <tr data-name="Gayathri" data-course="Aadhaar Ganit — Foundational Numeracy" data-status="applied"><td class="ld-cont">Gayathri</td><td>Aadhaar Ganit — Foundational Numeracy</td><td><span class="ld-src">SD</span></td><td><span class="ld-st applied">Applied</span></td></tr>
-          <tr data-name="Gomathi" data-course="Data management — CoLab" data-status="inc"><td>Gomathi</td><td>Data management — CoLab</td><td><span class="ld-src">OR</span></td><td><span class="ld-st inc">Incomplete</span></td></tr>
-          <tr data-name="Johanson" data-course="Designing contextual programs" data-status="none"><td>Johanson</td><td>Designing contextual programs</td><td><span class="ld-src">SD</span></td><td><span class="ld-st none">Not recorded</span></td></tr>
+          <tr data-name="Gayathri" data-course="Science workshop — APU" data-status="done"><td>Gayathri</td><td>Science workshop — APU</td><td><span class="ld-src" title="Self directed">SD</span></td><td><span class="ld-st done">Completed</span></td></tr>
+          <tr data-name="Gayathri" data-course="Aadhaar Ganit — Foundational Numeracy" data-status="applied"><td class="ld-cont">Gayathri</td><td>Aadhaar Ganit — Foundational Numeracy</td><td><span class="ld-src" title="Self directed">SD</span></td><td><span class="ld-st applied">Applied</span></td></tr>
+          <tr data-name="Gomathi" data-course="Data management — CoLab" data-status="inc"><td>Gomathi</td><td>Data management — CoLab</td><td><span class="ld-src" title="Organisation recommended">OR</span></td><td><span class="ld-st inc">Incomplete</span></td></tr>
+          <tr data-name="Johanson" data-course="Designing contextual programs" data-status="none"><td>Johanson</td><td>Designing contextual programs</td><td><span class="ld-src" title="Self directed">SD</span></td><td><span class="ld-st none">Not recorded</span></td></tr>
           <tr data-name="Juno" data-status="nil"><td>Juno</td><td class="ld-nil" colspan="3">No course or fellowship recorded yet</td></tr>
-          <tr data-name="Karunya" data-course="AI workshop — Tech4good" data-status="done"><td>Karunya</td><td>AI workshop — Tech4good</td><td><span class="ld-src">OR</span></td><td><span class="ld-st done">Completed</span></td></tr>
-          <tr data-name="Mahesh Kumar" data-course="Atma workshop" data-status="done"><td>Mahesh Kumar</td><td>Atma workshop</td><td><span class="ld-src">OR</span></td><td><span class="ld-st done">Completed</span></td></tr>
-          <tr data-name="Mathivathani" data-course="Stakeholder Management" data-status="none"><td>Mathivathani</td><td>Stakeholder Management</td><td><span class="ld-src">SD</span></td><td><span class="ld-st none">Not recorded</span></td></tr>
-          <tr data-name="Meghna" data-course="Shikshagraha" data-status="none"><td>Meghna</td><td>Shikshagraha</td><td><span class="ld-src">OR</span></td><td><span class="ld-st none">Not recorded</span></td></tr>
-          <tr data-name="Monisha" data-course="Storytelling Fellowship" data-status="applied"><td>Monisha</td><td>Storytelling Fellowship</td><td><span class="ld-src">OR</span></td><td><span class="ld-st applied">Applied</span></td></tr>
+          <tr data-name="Karunya" data-course="AI workshop — Tech4good" data-status="done"><td>Karunya</td><td>AI workshop — Tech4good</td><td><span class="ld-src" title="Organisation recommended">OR</span></td><td><span class="ld-st done">Completed</span></td></tr>
+          <tr data-name="Mahesh Kumar" data-course="Atma workshop" data-status="done"><td>Mahesh Kumar</td><td>Atma workshop</td><td><span class="ld-src" title="Organisation recommended">OR</span></td><td><span class="ld-st done">Completed</span></td></tr>
+          <tr data-name="Mathivathani" data-course="Stakeholder Management" data-status="none"><td>Mathivathani</td><td>Stakeholder Management</td><td><span class="ld-src" title="Self directed">SD</span></td><td><span class="ld-st none">Not recorded</span></td></tr>
+          <tr data-name="Meghna" data-course="Shikshagraha" data-status="none"><td>Meghna</td><td>Shikshagraha</td><td><span class="ld-src" title="Organisation recommended">OR</span></td><td><span class="ld-st none">Not recorded</span></td></tr>
+          <tr data-name="Monisha" data-course="Storytelling Fellowship" data-status="applied"><td>Monisha</td><td>Storytelling Fellowship</td><td><span class="ld-src" title="Organisation recommended">OR</span></td><td><span class="ld-st applied">Applied</span></td></tr>
           <tr data-name="Narmadha" data-status="nil"><td>Narmadha</td><td class="ld-nil" colspan="3">No course or fellowship recorded yet</td></tr>
           <tr data-name="Nisha" data-status="nil"><td>Nisha</td><td class="ld-nil" colspan="3">No course or fellowship recorded yet</td></tr>
           <tr data-name="Poomuthu" data-status="nil"><td>Poomuthu</td><td class="ld-nil" colspan="3">No course or fellowship recorded yet</td></tr>
-          <tr data-name="Preethi" data-course="Adobe" data-status="done"><td>Preethi</td><td>Adobe</td><td><span class="ld-src">OR</span></td><td><span class="ld-st done">Completed</span></td></tr>
-          <tr data-name="Preethi" data-course="Storytelling Fellowship" data-status="applied"><td class="ld-cont">Preethi</td><td>Storytelling Fellowship</td><td><span class="ld-src">OR</span></td><td><span class="ld-st applied">Applied</span></td></tr>
+          <tr data-name="Preethi" data-course="Adobe" data-status="done"><td>Preethi</td><td>Adobe</td><td><span class="ld-src" title="Organisation recommended">OR</span></td><td><span class="ld-st done">Completed</span></td></tr>
+          <tr data-name="Preethi" data-course="Storytelling Fellowship" data-status="applied"><td class="ld-cont">Preethi</td><td>Storytelling Fellowship</td><td><span class="ld-src" title="Organisation recommended">OR</span></td><td><span class="ld-st applied">Applied</span></td></tr>
           <tr data-name="Pushpathy" data-status="nil"><td>Pushpathy</td><td class="ld-nil" colspan="3">No course or fellowship recorded yet</td></tr>
           <tr data-name="Ram" data-status="nil"><td>Ram</td><td class="ld-nil" colspan="3">No course or fellowship recorded yet</td></tr>
           <tr data-name="Rajesh" data-status="nil"><td>Rajesh</td><td class="ld-nil" colspan="3">No course or fellowship recorded yet</td></tr>
           <tr data-name="Ravi Kumar" data-status="nil"><td>Ravi Kumar</td><td class="ld-nil" colspan="3">No course or fellowship recorded yet</td></tr>
           <tr data-name="Regi" data-status="nil"><td>Regi</td><td class="ld-nil" colspan="3">No course or fellowship recorded yet</td></tr>
-          <tr data-name="Sabaritha" data-course="Wellbeing workshop — Wipro" data-status="done"><td>Sabaritha</td><td>Wellbeing workshop — Wipro</td><td><span class="ld-src">OR</span></td><td><span class="ld-st done">Completed</span></td></tr>
+          <tr data-name="Sabaritha" data-course="Wellbeing workshop — Wipro" data-status="done"><td>Sabaritha</td><td>Wellbeing workshop — Wipro</td><td><span class="ld-src" title="Organisation recommended">OR</span></td><td><span class="ld-st done">Completed</span></td></tr>
           <tr data-name="Saktheeswaran" data-status="nil"><td>Saktheeswaran</td><td class="ld-nil" colspan="3">No course or fellowship recorded yet</td></tr>
           <tr data-name="Saravana Kumar" data-status="nil"><td>Saravana Kumar</td><td class="ld-nil" colspan="3">No course or fellowship recorded yet</td></tr>
           <tr data-name="Satya Moorthy" data-status="nil"><td>Satya Moorthy</td><td class="ld-nil" colspan="3">No course or fellowship recorded yet</td></tr>
-          <tr data-name="Sharon" data-course="Shikshagraha" data-status="none"><td>Sharon</td><td>Shikshagraha</td><td><span class="ld-src">OR</span></td><td><span class="ld-st none">Not recorded</span></td></tr>
+          <tr data-name="Sharon" data-course="Shikshagraha" data-status="none"><td>Sharon</td><td>Shikshagraha</td><td><span class="ld-src" title="Organisation recommended">OR</span></td><td><span class="ld-st none">Not recorded</span></td></tr>
           <tr data-name="Vanmathi" data-status="nil"><td>Vanmathi</td><td class="ld-nil" colspan="3">No course or fellowship recorded yet</td></tr>
-          <tr data-name="Vidhya" data-course="Wellbeing workshop — Wipro" data-status="done"><td>Vidhya</td><td>Wellbeing workshop — Wipro</td><td><span class="ld-src">OR</span></td><td><span class="ld-st done">Completed</span></td></tr>
-          <tr data-name="Vidhya" data-course="Aadhaar Ganit — Foundational Numeracy" data-status="applied"><td class="ld-cont">Vidhya</td><td>Aadhaar Ganit — Foundational Numeracy</td><td><span class="ld-src">SD</span></td><td><span class="ld-st applied">Applied</span></td></tr>
+          <tr data-name="Vidhya" data-course="Wellbeing workshop — Wipro" data-status="done"><td>Vidhya</td><td>Wellbeing workshop — Wipro</td><td><span class="ld-src" title="Organisation recommended">OR</span></td><td><span class="ld-st done">Completed</span></td></tr>
+          <tr data-name="Vidhya" data-course="Aadhaar Ganit — Foundational Numeracy" data-status="applied"><td class="ld-cont">Vidhya</td><td>Aadhaar Ganit — Foundational Numeracy</td><td><span class="ld-src" title="Self directed">SD</span></td><td><span class="ld-st applied">Applied</span></td></tr>
         </tbody>
       </table>
     </div>
-    <p class="ld-none" id="ld-none" hidden>Nothing matches that — try a different name or course.</p>
-    <p class="ld-legend"><strong>Source</strong> — <span class="ld-src">SD</span> and <span class="ld-src">OR</span> are recorded as they appear on the L&amp;D page. <strong>Status</strong> — <em>Applied</em> means a place has been requested but not yet confirmed; <em>Incomplete</em> means started and not finished.</p>
+    <p class="ld-none" id="ld-none" hidden>Nothing under that status for this person — try another status, or <strong>All</strong>.</p>
+    <div class="ld-key">
+      <div class="ld-key-item">
+        <span class="ld-src" title="Organisation recommended">OR</span>
+        <p><strong>Organisation recommended</strong> — put forward by Vidhya Vidhai, usually tied to a programme need or a capability we have agreed to build.</p>
+      </div>
+      <div class="ld-key-item">
+        <span class="ld-src" title="Self directed">SD</span>
+        <p><strong>Self directed</strong> — you found it and asked for it. Both count equally on the register; neither is worth more than the other.</p>
+      </div>
+      <div class="ld-key-item">
+        <span class="ld-st applied">Applied</span>
+        <p>A place has been requested but not yet confirmed. <strong>Incomplete</strong> means started and not finished; <strong>Completed</strong> means finished.</p>
+      </div>
+    </div>
   </section>
 </div>
 
@@ -2185,26 +2238,51 @@
   }
   window.addEventListener("hashchange", route);
 
-  /* learning register filter */
+  /* learning register: pick a person, then narrow by status */
   (function () {
-    var input = document.getElementById("ld-filter");
-    if (!input) return;
+    var sel = document.getElementById("ld-person");
+    if (!sel) return;
     var rows = Array.prototype.slice.call(document.querySelectorAll("#ld-body tr"));
     var tabs = Array.prototype.slice.call(document.querySelectorAll(".ld-tab"));
     var none = document.getElementById("ld-none");
+    var prompt = document.getElementById("ld-prompt");
+    var wrap = document.getElementById("ld-wrap");
+    var sum = document.getElementById("ld-sum");
+    var LABEL = { done: "completed", applied: "applied", inc: "incomplete", none: "logged without a status" };
     var st = "all";
+
+    function summarise(name) {
+      var mine = rows.filter(function (r) { return r.dataset.name === name; });
+      if (!mine.length || mine[0].dataset.status === "nil") {
+        return name + " has nothing on the register yet.";
+      }
+      var parts = ["done", "applied", "inc", "none"].map(function (k) {
+        var n = mine.filter(function (r) { return r.dataset.status === k; }).length;
+        return n ? n + " " + LABEL[k] : null;
+      }).filter(Boolean);
+      var n = mine.length;
+      return name + " — " + n + (n === 1 ? " course" : " courses") + ": " + parts.join(", ") + ".";
+    }
+
     function apply() {
-      var q = input.value.trim().toLowerCase();
+      var who = sel.value;
+      prompt.hidden = who !== "";
+      sum.hidden = (who === "" || who === "__all");
+      if (who === "") { wrap.hidden = true; none.hidden = true; return; }
+      if (!sum.hidden) sum.textContent = summarise(who);
+
       var shown = 0;
       rows.forEach(function (r) {
-        var hay = ((r.dataset.name || "") + " " + (r.dataset.course || "")).toLowerCase();
-        var ok = (st === "all" || r.dataset.status === st) && (!q || hay.indexOf(q) !== -1);
+        var ok = (who === "__all" || r.dataset.name === who) &&
+                 (st === "all" || r.dataset.status === st);
         r.hidden = !ok;
         if (ok) shown++;
       });
+      wrap.hidden = shown === 0;
       none.hidden = shown > 0;
     }
-    input.addEventListener("input", apply);
+
+    sel.addEventListener("change", apply);
     tabs.forEach(function (b) {
       b.addEventListener("click", function () {
         tabs.forEach(function (o) { o.classList.remove("is-on"); });
@@ -2213,6 +2291,7 @@
         apply();
       });
     });
+    apply();
   })();
 
   /* dashboard card filter */
