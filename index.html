@@ -343,6 +343,32 @@
   .rw td.num{font-variant-numeric:tabular-nums;font-weight:600;white-space:nowrap;color:var(--accent-deep)}
   .rw td:first-child{font-weight:600}
   .rw tbody tr:hover{background:#FDF8EC}
+  /* Learning & Development register */
+  .ld-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px}
+  .ld-stat{background:var(--card);border:1px solid var(--line);border-radius:3px;padding:16px 18px;display:flex;flex-direction:column;gap:4px}
+  .ld-stat .fig{font-family:var(--display);font-size:30px;line-height:1;color:var(--accent-deep)}
+  .ld-stat .lab{font-size:11.5px;color:var(--ink-soft);line-height:1.35}
+  .ld-controls{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-bottom:16px}
+  .ld-search{display:flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--line);border-radius:3px;padding:0 12px;flex:1 1 230px;min-width:0}
+  .ld-search svg{width:14px;height:14px;flex:0 0 auto;color:var(--grey)}
+  .ld-search input{border:0;background:none;font:inherit;font-size:13px;color:var(--ink);padding:10px 0;width:100%;min-width:0}
+  .ld-search input:focus{outline:none}
+  .ld-tabs{display:flex;flex-wrap:wrap;gap:6px}
+  .ld-tab{font:inherit;font-size:11.5px;font-weight:600;color:var(--ink-soft);background:var(--card);border:1px solid var(--line);border-radius:3px;padding:7px 12px;cursor:pointer}
+  .ld-tab:hover{border-color:var(--accent);color:var(--accent-deep)}
+  .ld-tab.is-on{background:var(--accent);border-color:var(--accent);color:#FFFCF4}
+  .ld-table td:first-child{white-space:nowrap;vertical-align:top}
+  .ld-table td.ld-cont{color:var(--grey);font-weight:400}
+  .ld-table td.ld-nil{color:var(--grey)}
+  .ld-src{font-size:10px;font-weight:700;letter-spacing:.07em;background:var(--grey-soft);color:var(--ink-soft);border-radius:3px;padding:2px 6px}
+  .ld-st{font-size:10.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;border-radius:3px;padding:3px 8px;white-space:nowrap}
+  .ld-st.done{background:var(--accent-soft);color:var(--accent-deep)}
+  .ld-st.applied{background:var(--marigold-soft);color:var(--marigold-deep)}
+  .ld-st.inc{background:#F6DCD4;color:#8A3D25}
+  .ld-st.none{background:var(--grey-soft);color:var(--grey)}
+  #ld-body tr[hidden]{display:none}
+  .ld-none{margin:16px 0 0;font-size:13px;color:var(--ink-soft)}
+  .ld-legend{margin:14px 0 0;font-size:12.5px;color:var(--ink-soft);line-height:1.55}
   .stack{display:flex;flex-direction:column;gap:18px}
 
   .board-hint{margin:0;padding:13px 18px 0;font-family:var(--display);font-style:italic;font-size:14.5px;color:var(--ink-soft)}
@@ -638,7 +664,7 @@
       </div>
     </article>
 
-    <article class="card" data-keys="learning development training pedagogy teacher capability leadership manager course sponsorship certification">
+    <article class="card" data-keys="learning development training pedagogy teacher capability leadership manager course sponsorship certification fellowship register workshop shikshagraha storytelling adobe wipro apu colab atma tech4good aadhaar ganit numeracy wellbeing">
       <div class="art">
         <svg viewBox="0 0 160 90" fill="none" aria-hidden="true">
           <path d="M80 44c-9-9-26-11-44-9v34c18-2 35 0 44 9z" fill="#FFFCF4" stroke="#16624F" stroke-width="2.2" stroke-linejoin="round"/>
@@ -654,14 +680,20 @@
       </div>
       <div class="card-body">
         <h3>Learning &amp; Development</h3>
-        <p class="purpose">Teachers keep learning too. Capability tracks for every role, funded and timetabled.</p>
+        <p class="purpose">Teachers keep learning too. Workshops, fellowships and external courses, tracked per person from application through to completion.</p>
         <ul class="contents">
-          <li>Induction and role-based training</li>
-          <li>Teacher capability and pedagogy tracks</li>
-          <li>Manager essentials and leadership</li>
-          <li>Sponsorship for external courses</li>
+          <li>Workshops — pedagogy, numeracy, wellbeing, AI and design</li>
+          <li>Fellowships and long-form external programmes</li>
+          <li>Applications tracked through to a confirmed place</li>
+          <li>A per-person register of what has been taken up</li>
         </ul>
-        <span class="chip" style="margin-top:auto">Quarterly</span>
+        <div class="card-foot">
+          <p class="live-line">15 enrolments · 25 people</p>
+          <button class="open-ats" type="button" data-goto="learning">
+            Course register
+            <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M1 6h10M6.5 1.5 11 6l-4.5 4.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
       </div>
     </article>
 
@@ -737,6 +769,92 @@
     <p>Vidhya Vidhai Foundation · People &amp; Culture</p>
     <p>Maintained by the P&amp;C team · last reviewed April 2026</p>
   </footer>
+</div>
+
+<!-- ============ LEARNING & DEVELOPMENT ============ -->
+<div class="page wide" id="view-learning" hidden>
+  <header class="ats-head">
+    <div class="brand">
+      <button class="back" type="button" data-goto="dash">
+        <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M11 6H1M5.5 1.5 1 6l4.5 4.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        People &amp; Culture
+      </button>
+      <h1>Learning &amp; <em>Development</em></h1>
+    </div>
+    <div class="source-note">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M2.5 3.2C4.3 2.3 6.4 2.4 8 3.4c1.6-1 3.7-1.1 5.5-.2v9c-1.8-.9-3.9-.8-5.5.2-1.6-1-3.7-1.1-5.5-.2z" stroke-linejoin="round"/><path d="M8 3.4v9.2"/></svg>
+      <p>The course and fellowship register, kept by People &amp; Culture. A working record rather than a policy — it changes as people apply, start and finish. A blank row means nothing has been logged yet, not that nothing happened.</p>
+    </div>
+  </header>
+
+  <section class="group">
+    <div class="group-head"><h2>Where the register stands</h2><span>This cycle</span></div>
+    <div class="ld-stats">
+      <div class="ld-stat"><span class="fig">15</span><span class="lab">Enrolments logged</span></div>
+      <div class="ld-stat"><span class="fig">12</span><span class="lab">People with a course</span></div>
+      <div class="ld-stat"><span class="fig">6</span><span class="lab">Completed</span></div>
+      <div class="ld-stat"><span class="fig">4</span><span class="lab">Applied, awaiting a place</span></div>
+      <div class="ld-stat"><span class="fig">13</span><span class="lab">Nothing logged yet</span></div>
+    </div>
+  </section>
+
+  <section class="group">
+    <div class="group-head"><h2>Course and fellowship register</h2><span>25 people</span></div>
+    <div class="ld-controls">
+      <label class="ld-search">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="7.2" cy="7.2" r="4.6"/><path d="M10.6 10.6 14 14" stroke-linecap="round"/></svg>
+        <input type="search" id="ld-filter" placeholder="Find a name or a course" aria-label="Filter the register by name or course">
+      </label>
+      <div class="ld-tabs" role="group" aria-label="Filter by status">
+        <button type="button" class="ld-tab is-on" data-st="all">All</button>
+        <button type="button" class="ld-tab" data-st="done">Completed</button>
+        <button type="button" class="ld-tab" data-st="applied">Applied</button>
+        <button type="button" class="ld-tab" data-st="inc">Incomplete</button>
+        <button type="button" class="ld-tab" data-st="none">Status not recorded</button>
+        <button type="button" class="ld-tab" data-st="nil">No entry yet</button>
+      </div>
+    </div>
+    <div class="rw-wrap">
+      <table class="rw ld-table">
+        <thead><tr>
+          <th scope="col">Employee</th><th scope="col">Course or fellowship</th>
+          <th scope="col">Source</th><th scope="col">Status</th>
+        </tr></thead>
+        <tbody id="ld-body">
+          <tr data-name="Gayathri" data-course="Science workshop — APU" data-status="done"><td>Gayathri</td><td>Science workshop — APU</td><td><span class="ld-src">SD</span></td><td><span class="ld-st done">Completed</span></td></tr>
+          <tr data-name="Gayathri" data-course="Aadhaar Ganit — Foundational Numeracy" data-status="applied"><td class="ld-cont">Gayathri</td><td>Aadhaar Ganit — Foundational Numeracy</td><td><span class="ld-src">SD</span></td><td><span class="ld-st applied">Applied</span></td></tr>
+          <tr data-name="Gomathi" data-course="Data management — CoLab" data-status="inc"><td>Gomathi</td><td>Data management — CoLab</td><td><span class="ld-src">OR</span></td><td><span class="ld-st inc">Incomplete</span></td></tr>
+          <tr data-name="Johanson" data-course="Designing contextual programs" data-status="none"><td>Johanson</td><td>Designing contextual programs</td><td><span class="ld-src">SD</span></td><td><span class="ld-st none">Not recorded</span></td></tr>
+          <tr data-name="Juno" data-status="nil"><td>Juno</td><td class="ld-nil" colspan="3">No course or fellowship recorded yet</td></tr>
+          <tr data-name="Karunya" data-course="AI workshop — Tech4good" data-status="done"><td>Karunya</td><td>AI workshop — Tech4good</td><td><span class="ld-src">OR</span></td><td><span class="ld-st done">Completed</span></td></tr>
+          <tr data-name="Mahesh Kumar" data-course="Atma workshop" data-status="done"><td>Mahesh Kumar</td><td>Atma workshop</td><td><span class="ld-src">OR</span></td><td><span class="ld-st done">Completed</span></td></tr>
+          <tr data-name="Mathivathani" data-course="Stakeholder Management" data-status="none"><td>Mathivathani</td><td>Stakeholder Management</td><td><span class="ld-src">SD</span></td><td><span class="ld-st none">Not recorded</span></td></tr>
+          <tr data-name="Meghna" data-course="Shikshagraha" data-status="none"><td>Meghna</td><td>Shikshagraha</td><td><span class="ld-src">OR</span></td><td><span class="ld-st none">Not recorded</span></td></tr>
+          <tr data-name="Monisha" data-course="Storytelling Fellowship" data-status="applied"><td>Monisha</td><td>Storytelling Fellowship</td><td><span class="ld-src">OR</span></td><td><span class="ld-st applied">Applied</span></td></tr>
+          <tr data-name="Narmadha" data-status="nil"><td>Narmadha</td><td class="ld-nil" colspan="3">No course or fellowship recorded yet</td></tr>
+          <tr data-name="Nisha" data-status="nil"><td>Nisha</td><td class="ld-nil" colspan="3">No course or fellowship recorded yet</td></tr>
+          <tr data-name="Poomuthu" data-status="nil"><td>Poomuthu</td><td class="ld-nil" colspan="3">No course or fellowship recorded yet</td></tr>
+          <tr data-name="Preethi" data-course="Adobe" data-status="done"><td>Preethi</td><td>Adobe</td><td><span class="ld-src">OR</span></td><td><span class="ld-st done">Completed</span></td></tr>
+          <tr data-name="Preethi" data-course="Storytelling Fellowship" data-status="applied"><td class="ld-cont">Preethi</td><td>Storytelling Fellowship</td><td><span class="ld-src">OR</span></td><td><span class="ld-st applied">Applied</span></td></tr>
+          <tr data-name="Pushpathy" data-status="nil"><td>Pushpathy</td><td class="ld-nil" colspan="3">No course or fellowship recorded yet</td></tr>
+          <tr data-name="Ram" data-status="nil"><td>Ram</td><td class="ld-nil" colspan="3">No course or fellowship recorded yet</td></tr>
+          <tr data-name="Rajesh" data-status="nil"><td>Rajesh</td><td class="ld-nil" colspan="3">No course or fellowship recorded yet</td></tr>
+          <tr data-name="Ravi Kumar" data-status="nil"><td>Ravi Kumar</td><td class="ld-nil" colspan="3">No course or fellowship recorded yet</td></tr>
+          <tr data-name="Regi" data-status="nil"><td>Regi</td><td class="ld-nil" colspan="3">No course or fellowship recorded yet</td></tr>
+          <tr data-name="Sabaritha" data-course="Wellbeing workshop — Wipro" data-status="done"><td>Sabaritha</td><td>Wellbeing workshop — Wipro</td><td><span class="ld-src">OR</span></td><td><span class="ld-st done">Completed</span></td></tr>
+          <tr data-name="Saktheeswaran" data-status="nil"><td>Saktheeswaran</td><td class="ld-nil" colspan="3">No course or fellowship recorded yet</td></tr>
+          <tr data-name="Saravana Kumar" data-status="nil"><td>Saravana Kumar</td><td class="ld-nil" colspan="3">No course or fellowship recorded yet</td></tr>
+          <tr data-name="Satya Moorthy" data-status="nil"><td>Satya Moorthy</td><td class="ld-nil" colspan="3">No course or fellowship recorded yet</td></tr>
+          <tr data-name="Sharon" data-course="Shikshagraha" data-status="none"><td>Sharon</td><td>Shikshagraha</td><td><span class="ld-src">OR</span></td><td><span class="ld-st none">Not recorded</span></td></tr>
+          <tr data-name="Vanmathi" data-status="nil"><td>Vanmathi</td><td class="ld-nil" colspan="3">No course or fellowship recorded yet</td></tr>
+          <tr data-name="Vidhya" data-course="Wellbeing workshop — Wipro" data-status="done"><td>Vidhya</td><td>Wellbeing workshop — Wipro</td><td><span class="ld-src">OR</span></td><td><span class="ld-st done">Completed</span></td></tr>
+          <tr data-name="Vidhya" data-course="Aadhaar Ganit — Foundational Numeracy" data-status="applied"><td class="ld-cont">Vidhya</td><td>Aadhaar Ganit — Foundational Numeracy</td><td><span class="ld-src">SD</span></td><td><span class="ld-st applied">Applied</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="ld-none" id="ld-none" hidden>Nothing matches that — try a different name or course.</p>
+    <p class="ld-legend"><strong>Source</strong> — <span class="ld-src">SD</span> and <span class="ld-src">OR</span> are recorded as they appear on the L&amp;D page. <strong>Status</strong> — <em>Applied</em> means a place has been requested but not yet confirmed; <em>Incomplete</em> means started and not finished.</p>
+  </section>
 </div>
 
 <!-- ============ ATS ============ -->
@@ -2042,7 +2160,7 @@
     renderBoard();
   });
 
-  var VIEWS = ["dash", "ats", "policies", "rewards"];
+  var VIEWS = ["dash", "ats", "policies", "rewards", "learning"];
   function show(view) {
     VIEWS.forEach(function (v) {
       document.getElementById("view-" + v).hidden = (v !== view);
@@ -2066,6 +2184,36 @@
     show(VIEWS.indexOf(h) > 0 ? h : "dash");
   }
   window.addEventListener("hashchange", route);
+
+  /* learning register filter */
+  (function () {
+    var input = document.getElementById("ld-filter");
+    if (!input) return;
+    var rows = Array.prototype.slice.call(document.querySelectorAll("#ld-body tr"));
+    var tabs = Array.prototype.slice.call(document.querySelectorAll(".ld-tab"));
+    var none = document.getElementById("ld-none");
+    var st = "all";
+    function apply() {
+      var q = input.value.trim().toLowerCase();
+      var shown = 0;
+      rows.forEach(function (r) {
+        var hay = ((r.dataset.name || "") + " " + (r.dataset.course || "")).toLowerCase();
+        var ok = (st === "all" || r.dataset.status === st) && (!q || hay.indexOf(q) !== -1);
+        r.hidden = !ok;
+        if (ok) shown++;
+      });
+      none.hidden = shown > 0;
+    }
+    input.addEventListener("input", apply);
+    tabs.forEach(function (b) {
+      b.addEventListener("click", function () {
+        tabs.forEach(function (o) { o.classList.remove("is-on"); });
+        b.classList.add("is-on");
+        st = b.dataset.st;
+        apply();
+      });
+    });
+  })();
 
   /* dashboard card filter */
   (function () {
