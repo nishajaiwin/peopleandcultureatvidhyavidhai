@@ -343,6 +343,11 @@
   .rw td.num{font-variant-numeric:tabular-nums;font-weight:600;white-space:nowrap;color:var(--accent-deep)}
   .rw td:first-child{font-weight:600}
   .rw tbody tr:hover{background:#FDF8EC}
+  /* Performance Review Policy */
+  .pr-flow{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:14px}
+  .pr-flow li{font-size:14px;line-height:1.5}
+  .pr-flow li::marker{font-weight:700;color:var(--accent-deep)}
+  .pr-flow .contents{margin-top:6px}
   /* Learning & Development register */
   .ld-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px}
   .ld-stat{background:var(--card);border:1px solid var(--line);border-radius:3px;padding:16px 18px;display:flex;flex-direction:column;gap:4px}
@@ -669,7 +674,13 @@
           <li>Annual review and calibration</li>
           <li>Growth plans and performance support</li>
         </ul>
-        <span class="chip" style="margin-top:auto">Half-yearly</span>
+        <div class="card-foot">
+          <p class="live-line">Quarterly cycle</p>
+          <button class="open-ats" type="button" data-goto="performance">
+            Performance Review Policy
+            <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M1 6h10M6.5 1.5 11 6l-4.5 4.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
       </div>
     </article>
 
@@ -1222,6 +1233,202 @@
 
   <footer>
     <p>Source: Team Handbook, Vidhya Vidhai Foundation</p>
+    <p>A living document — changes are made from time to time</p>
+  </footer>
+</div>
+
+<!-- ============ PERFORMANCE REVIEW POLICY ============ -->
+<div class="page wide" id="view-performance" hidden>
+  <header class="ats-head">
+    <div class="brand">
+      <button class="back" type="button" data-goto="dash">
+        <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M11 6H1M5.5 1.5 1 6l4.5 4.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        People &amp; Culture
+      </button>
+      <h1>Performance Review <em>Policy</em></h1>
+    </div>
+    <div class="source-note">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M2.5 3.2C4.3 2.3 6.4 2.4 8 3.4c1.6-1 3.7-1.1 5.5-.2v9c-1.8-.9-3.9-.8-5.5.2-1.6-1-3.7-1.1-5.5-.2z" stroke-linejoin="round"/><path d="M8 3.4v9.2"/></svg>
+      <p>The VVF Performance Review Policy book, kept by People &amp; Culture. The source document remains the authority where the two differ.</p>
+    </div>
+  </header>
+
+  <section class="group">
+    <div class="group-head"><h2>1. Objective of the Performance Review</h2></div>
+    <p>The Performance Review (PR) system at Vidhya Vidhai Foundation is designed to:</p>
+    <ul class="contents">
+      <li>Recognize meaningful contributions and key achievements</li>
+      <li>Support individual growth with constructive, evidence-based feedback</li>
+      <li>Deepen alignment with the organization's mission and values</li>
+      <li>Enable transparent dialogue between team members and leads / founders</li>
+      <li>Inform decisions around growth paths, learning needs, and support systems</li>
+    </ul>
+    <p><a href="https://drive.google.com/file/d/1iAukAq2iY0-y2EaBvVf6xqZp5MT2R6kn/view?usp=drive_link" target="_blank" rel="noopener">Flow chart of the PR process →</a></p>
+  </section>
+
+  <section class="group">
+    <div class="group-head"><h2>2. Core Components of the PR System</h2></div>
+    <div class="rw-wrap">
+      <table class="rw">
+        <thead><tr><th scope="col">Component</th><th scope="col">Focus</th><th scope="col">Frequency</th></tr></thead>
+        <tbody>
+          <tr><td>Individual Performance</td><td>Role-based contributions, outcomes, challenges, skill growth, peer feedback</td><td>Quarterly with monthly peer feedback</td></tr>
+          <tr><td>Organizational Alignment</td><td>Values demonstrated, team contribution, culture fit</td><td>Quarterly</td></tr>
+          <tr><td>Development Planning</td><td>Learning, support, and future goals</td><td>Quarterly</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="group">
+    <div class="group-head"><h2>3. Process Flow Overview</h2></div>
+    <ol class="pr-flow">
+      <li><b>Pre-Review Prep</b>
+        <ul class="contents">
+          <li>Team member updates PR form (deliverables, goals, and reflections)</li>
+          <li>Manager reviews trackers and prior reviews</li>
+          <li>Founders review self assessment, manager's reviews, prior reviews and peer reviews</li>
+        </ul>
+      </li>
+      <li><b>Performance Conversation (Segment 1)</b>
+        <ul class="contents">
+          <li>Highlight of the quarter</li>
+          <li>Evidence-backed achievements</li>
+          <li>Areas for improvement</li>
+          <li>Overcome challenges</li>
+          <li>Weekly Review/Goal check, OKRs, IDP status</li>
+          <li>Incorporate Monthly Peer Reviews</li>
+        </ul>
+      </li>
+      <li><b>Organizational Alignment Conversation (Segment 2)</b>
+        <ul class="contents">
+          <li>Discussion on values-based behaviors</li>
+          <li>Culture contributions and interpersonal reflections</li>
+        </ul>
+      </li>
+      <li><b>Mutual Feedback + Development Planning</b>
+        <ul class="contents">
+          <li>Goals setting and L&amp;D support</li>
+          <li>Open feedback exchange</li>
+        </ul>
+      </li>
+      <li><b>Documentation &amp; Sign-off</b>
+        <ul class="contents">
+          <li>Summary saved for reference and tracking</li>
+        </ul>
+      </li>
+    </ol>
+  </section>
+
+  <section class="group">
+    <div class="group-head"><h2>4. Segment 1: Individual Performance</h2></div>
+    <p>Purpose: to assess outcomes and contributions made in alignment with defined roles and goals. This includes self-assessment (quarterly), manager review (quarterly), and peer reviews gathered monthly.</p>
+    <div class="rw-wrap">
+      <table class="rw">
+        <thead><tr><th scope="col">Section</th><th scope="col">Why it Matters</th><th scope="col">To Be Filled By</th><th scope="col">Sample Questions</th></tr></thead>
+        <tbody>
+          <tr><td>Highlight of the quarter</td><td>Identifies standout moments and meaningful contributions</td><td>Self &amp; Manager</td><td>What accomplishment are you most proud of and why? Which moment gave you the most joy or fulfillment? What do you believe made the biggest impact on your team or project? Was there an instance where you exceeded your own expectations?</td></tr>
+          <tr><td>Goals Met / Not Met</td><td>Measures goal completion and reflection</td><td>Self &amp; Manager</td><td>Which goals did you fully accomplish? What enabled that success? Which goals were partially or not achieved? Why? Were there any goals you had to adapt or reprioritize? What patterns do you notice in how you approach goals?</td></tr>
+          <tr><td>Evidence of Performance</td><td>Ensures accountability and substantiates claims</td><td>Self</td><td>What files, reports, trackers, or outputs support your performance? Can you share any stakeholder testimonials or outcomes? What tools or documentation reflect your day-to-day contributions? Were there feedback notes that align with your key achievements?</td></tr>
+          <tr><td>Area for Improvement (AFI)</td><td>Fuels a growth mindset and honesty</td><td>Self &amp; Manager</td><td>Which areas do you think need more focus or strengthening? What feedback have you received consistently? Are there tasks or skills you found challenging? How do you plan to address these areas in the next cycle?</td></tr>
+          <tr><td>Challenges Faced / Overcome</td><td>Builds empathy, resilience, and narrative of growth</td><td>Self &amp; Manager</td><td>What were the toughest moments or blockers this cycle? How did you approach and manage these situations? What internal or external support helped you overcome them? What did these challenges teach you about your role or approach?</td></tr>
+          <tr><td>Skill &amp; Development Tracking</td><td>Tracks personal growth over time</td><td>Self</td><td>What new skills did you learn or improve upon? What learning methods or opportunities were most useful? Which PDP goals did you progress on? Where do you feel more confident now than before?</td></tr>
+          <tr><td>Peer Reviews Summary</td><td>Adds 360-degree perspective on collaboration and behavior</td><td>Peers (Monthly), Manager (Summary)</td><td>What consistent themes emerged from your peer feedback? What strengths did peers recognize in you? Were there suggestions for collaboration, communication, or leadership? How have you acted upon feedback from your peers, if any?</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="group">
+    <div class="group-head"><h2>5. Segment 2: Organizational Alignment (Values Assessment)</h2></div>
+    <p>Purpose: to recognize how each team member lives out the core values of Vidhya Vidhai in their daily work and relationships.</p>
+    <div class="rw-wrap">
+      <table class="rw">
+        <thead><tr><th scope="col">Value</th><th scope="col">What it Looks Like</th><th scope="col">Sample Prompts</th></tr></thead>
+        <tbody>
+          <tr><td>Respect &amp; Humility</td><td>Listens to stakeholders, team members, and everyone related to work; values local knowledge</td><td>How have you demonstrated respect toward school partners, community members, or colleagues? Can you share an example where you paused to understand someone's perspective before offering yours? How have you acknowledged or uplifted others' contributions or experiences? Have you noticed any moments where you could have practiced more humility?</td></tr>
+          <tr><td>Collective</td><td>Works collaboratively, facilitates team wins</td><td>What has been your most meaningful collaboration this cycle? How have you supported the success of others? Can you describe a situation where you co-created something with a peer or cross-functional team? How do you ensure your work aligns with the team's shared goals?</td></tr>
+          <tr><td>Perseverance</td><td>Shows consistency despite difficulties</td><td>Share a time when you had to keep going despite uncertainty, failure, or a slow process. What motivated you to stay consistent in that situation? How do you personally manage pressure, delays, or unexpected changes? Have you noticed any shift in your ability to bounce back this cycle?</td></tr>
+          <tr><td>Quality</td><td>Attention to detail, thoughtful delivery</td><td>What specific steps did you take to ensure the quality of a project or output? Can you share an example where feedback led you to improve your work? How do you approach quality in both content and process? In which part of your work do you see the highest quality reflected?</td></tr>
+          <tr><td>Ownership</td><td>Takes initiative, accountable, shapes solutions</td><td>Can you describe a moment where you took full responsibility for a task or decision? What initiative did you take that wasn't expected but made a difference? How have you held yourself accountable for results or outcomes? Have you influenced or improved any process or system proactively?</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="purpose">Values Assessment Format: each value is scored against Self Reflection, Evidence/Stories, Manager Observation and Evidence/Stories, captured on the PR Template.</p>
+  </section>
+
+  <section class="group">
+    <div class="group-head"><h2>6. Development &amp; Commitment Planning</h2></div>
+    <div class="rw-wrap">
+      <table class="rw">
+        <thead><tr><th scope="col">Area</th><th scope="col">Self Input</th><th scope="col">Manager Input</th></tr></thead>
+        <tbody>
+          <tr><td>Learning goals for next cycle</td><td>Captured on the PR Template</td><td>Captured on the PR Template</td></tr>
+          <tr><td>Support needed</td><td>Captured on the PR Template</td><td>Captured on the PR Template</td></tr>
+          <tr><td>Growth aspirations</td><td>Captured on the PR Template</td><td>Captured on the PR Template</td></tr>
+          <tr><td>Timeline of commitment</td><td>Captured on the PR Template</td><td>Captured on the PR Template</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="group">
+    <div class="group-head"><h2>7. 5-Point Narrative Scale for Appraisal</h2></div>
+    <div class="rw-wrap">
+      <table class="rw">
+        <thead><tr><th scope="col">Level</th><th scope="col">Level Name</th><th scope="col">Typical Profile</th><th scope="col">Key Characteristics</th></tr></thead>
+        <tbody>
+          <tr><td>Level 1</td><td>Foundational</td><td>Fresh graduate or early-career professional; new to VV or the development sector; still exploring skills and strengths</td><td>Learning-oriented; high need for scaffolding and feedback; limited scope of ownership; may assist in projects but not lead; still learning VV values and ways of working</td></tr>
+          <tr><td>Level 2</td><td>Contributing</td><td>1–3 years of experience; some time at VV (or similar org); ready to take responsibility for parts of a project</td><td>Manages segments of a project or task; shows initiative, takes feedback well; understands VV values and mission; may support peers or interns; developing autonomy in planning and execution</td></tr>
+          <tr><td>Level 3</td><td>Anchoring</td><td>Experienced and deeply embedded in VV's culture; seen as a go-to person or informal leader</td><td>Owns end-to-end projects or verticals; mentors or supports junior members; trusted by peers and stakeholders; operates with high autonomy and accountability; begins to influence systems and culture</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="rw-wrap" style="margin-top:14px">
+      <table class="rw">
+        <thead><tr><th scope="col">Rating</th><th scope="col">Label</th><th scope="col">Description</th><th scope="col">Suggested rate L1</th><th scope="col">Suggested rate L2</th><th scope="col">Suggested rate L3</th></tr></thead>
+        <tbody>
+          <tr><td class="num">5</td><td>Consistently Exemplary</td><td>Consistently demonstrates high-quality outcomes and strong alignment with VVF values. Often goes beyond what is expected, supports others, and raises the bar. Shows leadership in role.</td><td>8–10%</td><td>5–7%</td><td>3–5%</td></tr>
+          <tr><td class="num">4</td><td>Reliable &amp; Value-Aligned</td><td>Meets expectations with quality and care. Shows solid ownership, good collaboration, and lives the values well. Occasionally goes beyond role.</td><td>5–7%</td><td>3–5%</td><td>2–3%</td></tr>
+          <tr><td class="num">3</td><td>Emerging &amp; Learning</td><td>Meets many expectations but still builds consistency. Demonstrates potential and openness to growth. Requires structured feedback and support to fully embody values and responsibilities.</td><td>3–5%</td><td>1–3%</td><td>1–2%</td></tr>
+          <tr><td class="num">2</td><td>Needs Support to Grow</td><td>Struggles to meet expectations or show values-aligned behavior. Needs continuous support, closer guidance, or mindset shifts to perform effectively.</td><td>1–3%</td><td>0–1%</td><td>0–1%</td></tr>
+          <tr><td class="num">1</td><td>Critical Intervention Needed</td><td>Performance or behavior is significantly misaligned with role or values. Requires urgent and structured intervention, possibly a role reset or performance plan.</td><td>0%</td><td>0%</td><td>0%</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="group">
+    <div class="group-head"><h2>8. Review Logistics &amp; Tools</h2></div>
+    <div class="rw-wrap">
+      <table class="rw">
+        <thead><tr><th scope="col">Tool</th><th scope="col">Description</th></tr></thead>
+        <tbody>
+          <tr><td><a href="https://docs.google.com/spreadsheets/d/1124xQuN1OPokE_Mt1Ij9w9n6K0vyK_Vs3DbjawUFp6A/edit?gid=0#gid=0" target="_blank" rel="noopener">PR Template</a></td><td>Google Sheet used for self &amp; manager inputs</td></tr>
+          <tr><td>Goal Tracker</td><td>VV's monthly goals and individual planner to track quarterly progress on goals and development</td></tr>
+          <tr><td><a href="https://docs.google.com/forms/d/e/1FAIpQLSf1WwZXXEi_yVFl6YdPz8ItkIZtH_ZSltGiGV8c_UPbpDPvaQ/viewform?usp=header" target="_blank" rel="noopener">Peer Feedback</a> (Optional)</td><td>Short monthly Google Form for qualitative input</td></tr>
+          <tr><td>IDP document</td><td>Used to reflect on professional development milestones</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="group">
+    <div class="group-head"><h2>9. Roles &amp; Responsibilities</h2></div>
+    <div class="rw-wrap">
+      <table class="rw">
+        <thead><tr><th scope="col">Role</th><th scope="col">Responsibilities</th></tr></thead>
+        <tbody>
+          <tr><td>Team Member</td><td>Prepare self-reflection, provide evidence, co-own growth goals</td></tr>
+          <tr><td>Manager</td><td>Provide thoughtful feedback, validate achievements, support development</td></tr>
+          <tr><td>People &amp; Culture</td><td>Set timeline, support logistics, track follow-ups and insights</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer>
+    <p>Source: VVF_Performance_Review_Policy document</p>
     <p>A living document — changes are made from time to time</p>
   </footer>
 </div>
@@ -2213,7 +2420,7 @@
     renderBoard();
   });
 
-  var VIEWS = ["dash", "ats", "policies", "rewards", "learning"];
+  var VIEWS = ["dash", "ats", "policies", "rewards", "learning", "performance"];
   function show(view) {
     VIEWS.forEach(function (v) {
       document.getElementById("view-" + v).hidden = (v !== view);
