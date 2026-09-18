@@ -386,6 +386,8 @@
   .stack{display:flex;flex-direction:column;gap:18px}
 
   /* Learning & Development — per-employee folders */
+  .ld-toolbar{display:flex;justify-content:flex-end;margin-bottom:12px}
+  .dlg p.err{margin:0;font-size:12.5px;color:#8A3D25}
   .ld-folders{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px}
   .ld-folder{
     text-align:left;display:flex;align-items:center;gap:11px;
@@ -848,35 +850,12 @@
   </section>
 
   <section class="group">
-    <div class="group-head"><h2>Open a file</h2><span>25 people</span></div>
+    <div class="group-head"><h2>Open a file</h2><span id="ld-folder-count">25 people</span></div>
     <p class="ld-prompt" style="margin-bottom:14px">Select a name to open that person's own page — log a course or workshop, its source, its status, and a few words on how it went. Saved to this browser only, the same as the applicant tracker.</p>
-    <div class="ld-folders" id="ld-folders">
-      <button class="ld-folder" type="button" data-person="Gayathri"><svg aria-hidden="true"><use href="#folder-icon"/></svg><span class="ld-folder-txt"><span class="ld-folder-name">Gayathri</span><span class="ld-folder-sub"></span></span></button>
-      <button class="ld-folder" type="button" data-person="Gomathi"><svg aria-hidden="true"><use href="#folder-icon"/></svg><span class="ld-folder-txt"><span class="ld-folder-name">Gomathi</span><span class="ld-folder-sub"></span></span></button>
-      <button class="ld-folder" type="button" data-person="Johanson"><svg aria-hidden="true"><use href="#folder-icon"/></svg><span class="ld-folder-txt"><span class="ld-folder-name">Johanson</span><span class="ld-folder-sub"></span></span></button>
-      <button class="ld-folder" type="button" data-person="Juno"><svg aria-hidden="true"><use href="#folder-icon"/></svg><span class="ld-folder-txt"><span class="ld-folder-name">Juno</span><span class="ld-folder-sub"></span></span></button>
-      <button class="ld-folder" type="button" data-person="Karunya"><svg aria-hidden="true"><use href="#folder-icon"/></svg><span class="ld-folder-txt"><span class="ld-folder-name">Karunya</span><span class="ld-folder-sub"></span></span></button>
-      <button class="ld-folder" type="button" data-person="Mahesh Kumar"><svg aria-hidden="true"><use href="#folder-icon"/></svg><span class="ld-folder-txt"><span class="ld-folder-name">Mahesh Kumar</span><span class="ld-folder-sub"></span></span></button>
-      <button class="ld-folder" type="button" data-person="Mathivathani"><svg aria-hidden="true"><use href="#folder-icon"/></svg><span class="ld-folder-txt"><span class="ld-folder-name">Mathivathani</span><span class="ld-folder-sub"></span></span></button>
-      <button class="ld-folder" type="button" data-person="Meghna"><svg aria-hidden="true"><use href="#folder-icon"/></svg><span class="ld-folder-txt"><span class="ld-folder-name">Meghna</span><span class="ld-folder-sub"></span></span></button>
-      <button class="ld-folder" type="button" data-person="Monisha"><svg aria-hidden="true"><use href="#folder-icon"/></svg><span class="ld-folder-txt"><span class="ld-folder-name">Monisha</span><span class="ld-folder-sub"></span></span></button>
-      <button class="ld-folder" type="button" data-person="Narmadha"><svg aria-hidden="true"><use href="#folder-icon"/></svg><span class="ld-folder-txt"><span class="ld-folder-name">Narmadha</span><span class="ld-folder-sub"></span></span></button>
-      <button class="ld-folder" type="button" data-person="Nisha"><svg aria-hidden="true"><use href="#folder-icon"/></svg><span class="ld-folder-txt"><span class="ld-folder-name">Nisha</span><span class="ld-folder-sub"></span></span></button>
-      <button class="ld-folder" type="button" data-person="Poomuthu"><svg aria-hidden="true"><use href="#folder-icon"/></svg><span class="ld-folder-txt"><span class="ld-folder-name">Poomuthu</span><span class="ld-folder-sub"></span></span></button>
-      <button class="ld-folder" type="button" data-person="Preethi"><svg aria-hidden="true"><use href="#folder-icon"/></svg><span class="ld-folder-txt"><span class="ld-folder-name">Preethi</span><span class="ld-folder-sub"></span></span></button>
-      <button class="ld-folder" type="button" data-person="Pushpathy"><svg aria-hidden="true"><use href="#folder-icon"/></svg><span class="ld-folder-txt"><span class="ld-folder-name">Pushpathy</span><span class="ld-folder-sub"></span></span></button>
-      <button class="ld-folder" type="button" data-person="Ram"><svg aria-hidden="true"><use href="#folder-icon"/></svg><span class="ld-folder-txt"><span class="ld-folder-name">Ram</span><span class="ld-folder-sub"></span></span></button>
-      <button class="ld-folder" type="button" data-person="Rajesh"><svg aria-hidden="true"><use href="#folder-icon"/></svg><span class="ld-folder-txt"><span class="ld-folder-name">Rajesh</span><span class="ld-folder-sub"></span></span></button>
-      <button class="ld-folder" type="button" data-person="Ravi Kumar"><svg aria-hidden="true"><use href="#folder-icon"/></svg><span class="ld-folder-txt"><span class="ld-folder-name">Ravi Kumar</span><span class="ld-folder-sub"></span></span></button>
-      <button class="ld-folder" type="button" data-person="Regi"><svg aria-hidden="true"><use href="#folder-icon"/></svg><span class="ld-folder-txt"><span class="ld-folder-name">Regi</span><span class="ld-folder-sub"></span></span></button>
-      <button class="ld-folder" type="button" data-person="Sabaritha"><svg aria-hidden="true"><use href="#folder-icon"/></svg><span class="ld-folder-txt"><span class="ld-folder-name">Sabaritha</span><span class="ld-folder-sub"></span></span></button>
-      <button class="ld-folder" type="button" data-person="Saktheeswaran"><svg aria-hidden="true"><use href="#folder-icon"/></svg><span class="ld-folder-txt"><span class="ld-folder-name">Saktheeswaran</span><span class="ld-folder-sub"></span></span></button>
-      <button class="ld-folder" type="button" data-person="Saravana Kumar"><svg aria-hidden="true"><use href="#folder-icon"/></svg><span class="ld-folder-txt"><span class="ld-folder-name">Saravana Kumar</span><span class="ld-folder-sub"></span></span></button>
-      <button class="ld-folder" type="button" data-person="Satya Moorthy"><svg aria-hidden="true"><use href="#folder-icon"/></svg><span class="ld-folder-txt"><span class="ld-folder-name">Satya Moorthy</span><span class="ld-folder-sub"></span></span></button>
-      <button class="ld-folder" type="button" data-person="Sharon"><svg aria-hidden="true"><use href="#folder-icon"/></svg><span class="ld-folder-txt"><span class="ld-folder-name">Sharon</span><span class="ld-folder-sub"></span></span></button>
-      <button class="ld-folder" type="button" data-person="Vanmathi"><svg aria-hidden="true"><use href="#folder-icon"/></svg><span class="ld-folder-txt"><span class="ld-folder-name">Vanmathi</span><span class="ld-folder-sub"></span></span></button>
-      <button class="ld-folder" type="button" data-person="Vidhya"><svg aria-hidden="true"><use href="#folder-icon"/></svg><span class="ld-folder-txt"><span class="ld-folder-name">Vidhya</span><span class="ld-folder-sub"></span></span></button>
+    <div class="ld-toolbar">
+      <button class="btn primary" type="button" id="ld-add-emp-btn">+ Add employee</button>
     </div>
+    <div class="ld-folders" id="ld-folders"></div>
   </section>
 
   <section class="group">
@@ -1690,6 +1669,25 @@
       <span class="spacer"></span>
       <button class="btn" type="button" data-close>Cancel</button>
       <button class="btn primary" type="submit">Save</button>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="dlg-employee">
+  <form method="dialog" class="dlg" id="form-employee">
+    <h2>New employee file</h2>
+    <p class="hint">Creates a folder for them with the same course/workshop, source, status and remarks fields as everyone else's.</p>
+    <div class="fields">
+      <div class="field full">
+        <label for="emp-name">Employee name</label>
+        <input id="emp-name" name="name" required placeholder="Full name" maxlength="80">
+      </div>
+    </div>
+    <p class="err" id="emp-error" hidden></p>
+    <div class="dlg-foot">
+      <span class="spacer"></span>
+      <button class="btn" type="button" data-close>Cancel</button>
+      <button class="btn primary" type="submit">Create folder</button>
     </div>
   </form>
 </dialog>
@@ -2609,6 +2607,11 @@
     var idSeq = 0;
     function ldUid() { idSeq++; return "ldp" + Date.now().toString(36) + idSeq; }
 
+    var ROSTER_SEED = ["Gayathri", "Gomathi", "Johanson", "Juno", "Karunya", "Mahesh Kumar",
+      "Mathivathani", "Meghna", "Monisha", "Narmadha", "Nisha", "Poomuthu", "Preethi", "Pushpathy",
+      "Ram", "Rajesh", "Ravi Kumar", "Regi", "Sabaritha", "Saktheeswaran", "Saravana Kumar",
+      "Satya Moorthy", "Sharon", "Vanmathi", "Vidhya"];
+
     function seedEntries() {
       function e(course, source, status) {
         return { id: ldUid(), course: course, source: source, status: status, remarks: "" };
@@ -2635,10 +2638,14 @@
       if (raw) {
         try {
           var parsed = JSON.parse(raw);
-          if (parsed && parsed.entries) return parsed;
+          if (parsed && parsed.entries) {
+            // Older saves (from before folders could be added) have no roster of their own.
+            if (!parsed.roster) parsed.roster = ROSTER_SEED.slice();
+            return parsed;
+          }
         } catch (err) { /* fall through to the seed */ }
       }
-      return { version: 1, entries: seedEntries() };
+      return { version: 1, roster: ROSTER_SEED.slice(), entries: seedEntries() };
     }
     function saveLd() {
       try { localStorage.setItem(LD_KEY, JSON.stringify(ldState)); } catch (err) { /* storage blocked */ }
@@ -2650,18 +2657,62 @@
       return ldState.entries[name];
     }
 
-    var folders = Array.prototype.slice.call(document.querySelectorAll(".ld-folder"));
-    function renderFolders() {
-      folders.forEach(function (b) {
-        var n = entriesFor(b.dataset.person).length;
-        var sub = b.querySelector(".ld-folder-sub");
-        sub.textContent = n === 0 ? "Nothing logged" : (n + (n === 1 ? " course" : " courses"));
-      });
-    }
-    folders.forEach(function (b) {
+    var foldersWrap = document.getElementById("ld-folders");
+    var folderCount = document.getElementById("ld-folder-count");
+
+    function makeFolderBtn(name) {
+      var b = document.createElement("button");
+      b.className = "ld-folder";
+      b.type = "button";
+      b.dataset.person = name;
+      b.innerHTML = '<svg aria-hidden="true"><use href="#folder-icon"/></svg>' +
+        '<span class="ld-folder-txt"><span class="ld-folder-name"></span><span class="ld-folder-sub"></span></span>';
+      b.querySelector(".ld-folder-name").textContent = name;
       b.addEventListener("click", function () {
-        location.hash = "#learning/" + encodeURIComponent(b.dataset.person);
+        location.hash = "#learning/" + encodeURIComponent(name);
       });
+      return b;
+    }
+
+    function renderFolders() {
+      foldersWrap.textContent = "";
+      ldState.roster.forEach(function (name) {
+        var b = makeFolderBtn(name);
+        var n = entriesFor(name).length;
+        b.querySelector(".ld-folder-sub").textContent = n === 0 ? "Nothing logged" : (n + (n === 1 ? " course" : " courses"));
+        foldersWrap.appendChild(b);
+      });
+      var total = ldState.roster.length;
+      folderCount.textContent = total + (total === 1 ? " person" : " people");
+    }
+
+    /* new employee — adds a folder with the same fields as everyone else's */
+    var dlgEmployee = document.getElementById("dlg-employee");
+    var empNameInput = document.getElementById("emp-name");
+    var empError = document.getElementById("emp-error");
+
+    document.getElementById("ld-add-emp-btn").addEventListener("click", function () {
+      empNameInput.value = "";
+      empError.hidden = true;
+      dlgEmployee.showModal();
+      empNameInput.focus();
+    });
+
+    document.getElementById("form-employee").addEventListener("submit", function (ev) {
+      var name = empNameInput.value.trim().replace(/\s+/g, " ");
+      if (!name) { ev.preventDefault(); return; }
+      var exists = ldState.roster.some(function (n) { return n.toLowerCase() === name.toLowerCase(); });
+      if (exists) {
+        ev.preventDefault();
+        empError.textContent = "There's already a file for " + name + ".";
+        empError.hidden = false;
+        return;
+      }
+      ldState.roster.push(name);
+      entriesFor(name); // creates their (empty) entry list
+      saveLd();
+      renderFolders();
+      location.hash = "#learning/" + encodeURIComponent(name);
     });
 
     var nameHeading = document.getElementById("ldp-name");
@@ -2758,7 +2809,7 @@
     });
 
     ldPersonHandler = function (name) {
-      if (!(name in ldState.entries) && folders.every(function (b) { return b.dataset.person !== name; })) {
+      if (ldState.roster.indexOf(name) === -1) {
         location.hash = "#learning";
         return;
       }
