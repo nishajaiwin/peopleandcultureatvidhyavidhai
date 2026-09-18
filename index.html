@@ -403,8 +403,10 @@
   /* Learning & Development — single-employee editable page */
   .ldp-entries{display:flex;flex-direction:column;gap:16px;margin-bottom:16px}
   .ldp-entry{background:var(--card);border:1px solid var(--line);border-radius:3px;padding:16px 18px 18px}
+  .ldp-entry.is-editing{border-color:var(--accent)}
   .ldp-entry-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
   .ldp-entry-num{font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft)}
+  .ldp-entry-actions{display:flex;align-items:center;gap:8px}
   .ldp-remove{
     background:none;border:1px solid transparent;color:var(--ink-soft);cursor:pointer;
     font-size:17px;line-height:1;padding:2px 8px;border-radius:3px;
@@ -412,6 +414,11 @@
   .ldp-remove:hover{color:#8A3D25;background:#F6DCD4;border-color:#F6DCD4}
   .ldp-wc{font-weight:400;text-transform:none;letter-spacing:0;font-size:11px;color:var(--ink-soft);float:right}
   .ldp-wc.over{color:#8A3D25;font-weight:700}
+  .ldp-view{display:flex;flex-direction:column;gap:9px}
+  .ldp-view-course{font-family:var(--display);font-weight:400;font-size:17px;margin:0;line-height:1.3}
+  .ldp-view-meta{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+  .ldp-view-remarks{margin:0;font-size:13px;color:var(--ink);line-height:1.6;white-space:pre-wrap}
+  .ldp-view-remarks.ld-nil-text{color:var(--grey);font-style:italic}
 
   .board-hint{margin:0;padding:13px 18px 0;font-family:var(--display);font-style:italic;font-size:14.5px;color:var(--ink-soft)}
   .board{display:flex;gap:13px;overflow-x:auto;padding:16px 18px 20px;align-items:flex-start}
@@ -2731,23 +2738,80 @@
       wc.classList.toggle("over", n > 500);
     }
 
-    function entryCard(entry, idx) {
+    var STATUS_LABEL = { applied: "Applied", ongoing: "Ongoing", dropped: "Dropped", completed: "Completed" };
+    var STATUS_CLASS = { applied: "applied", ongoing: "inc", dropped: "none", completed: "done" };
+    var SOURCE_LABEL = { OR: "Organisation recommended", SD: "Self directed" };
+
+    function statusBadge(status) {
+      if (!status) return '<span class="ld-st none">Not set</span>';
+      return '<span class="ld-st ' + STATUS_CLASS[status] + '">' + STATUS_LABEL[status] + '</span>';
+    }
+    function sourceBadge(source) {
+      if (!source) return '<span class="ld-src" title="Not set">—</span>';
+      return '<span class="ld-src" title="' + SOURCE_LABEL[source] + '">' + source + '</span>';
+    }
+    function fieldsHtml() {
+      return '<div class="fields">' +
+        '<div class="field full"><label>Course / workshop</label>' +
+        '<input type="text" class="ldp-course" maxlength="200" placeholder="e.g. Foundational Numeracy — Aadhaar Ganit"></div>' +
+        '<div class="field"><label>Source</label><select class="ldp-source">' +
+          '<option value="">Choose…</option><option value="OR">OR — Organisation recommended</option><option value="SD">SD — Self directed</option>' +
+        '</select></div>' +
+        '<div class="field"><label>Status</label><select class="ldp-status">' +
+          '<option value="">Choose…</option><option value="applied">Applied</option><option value="ongoing">Ongoing</option><option value="dropped">Dropped</option><option value="completed">Completed</option>' +
+        '</select></div>' +
+        '<div class="field full"><label>Remarks <span class="ldp-wc">0 / 500 words</span></label>' +
+        '<textarea class="ldp-remarks" rows="5" placeholder="What was this program like? What did you take from it? (about 500 words)"></textarea></div>' +
+      '</div>';
+    }
+
+    /* read-only card, with an Edit button that swaps it for the edit form */
+    function viewCard(entry, idx) {
       var card = document.createElement("div");
       card.className = "ldp-entry";
       card.innerHTML =
         '<div class="ldp-entry-head"><span class="ldp-entry-num">Entry ' + (idx + 1) + '</span>' +
-        '<button class="ldp-remove" type="button" title="Remove this entry" aria-label="Remove this entry">&times;</button></div>' +
-        '<div class="fields">' +
-          '<div class="field full"><label>Course / workshop</label>' +
-          '<input type="text" class="ldp-course" maxlength="200" placeholder="e.g. Foundational Numeracy — Aadhaar Ganit"></div>' +
-          '<div class="field"><label>Source</label><select class="ldp-source">' +
-            '<option value="">Choose…</option><option value="OR">OR — Organisation recommended</option><option value="SD">SD — Self directed</option>' +
-          '</select></div>' +
-          '<div class="field"><label>Status</label><select class="ldp-status">' +
-            '<option value="">Choose…</option><option value="applied">Applied</option><option value="ongoing">Ongoing</option><option value="dropped">Dropped</option><option value="completed">Completed</option>' +
-          '</select></div>' +
-          '<div class="field full"><label>Remarks <span class="ldp-wc">0 / 500 words</span></label>' +
-          '<textarea class="ldp-remarks" rows="5" placeholder="What was this program like? What did you take from it? (about 500 words)"></textarea></div>' +
+        '<div class="ldp-entry-actions">' +
+          '<button class="btn ldp-edit" type="button">Edit</button>' +
+          '<button class="ldp-remove" type="button" title="Remove this entry" aria-label="Remove this entry">&times;</button>' +
+        '</div></div>' +
+        '<div class="ldp-view">' +
+          '<h4 class="ldp-view-course"></h4>' +
+          '<div class="ldp-view-meta"></div>' +
+          '<p class="ldp-view-remarks"></p>' +
+        '</div>';
+
+      card.querySelector(".ldp-view-course").textContent = entry.course || "No course or workshop named yet";
+      card.querySelector(".ldp-view-meta").innerHTML = sourceBadge(entry.source) + statusBadge(entry.status);
+      var remarksEl = card.querySelector(".ldp-view-remarks");
+      remarksEl.textContent = entry.remarks || "No remarks yet.";
+      if (!entry.remarks) remarksEl.classList.add("ld-nil-text");
+
+      card.querySelector(".ldp-edit").addEventListener("click", function () {
+        card.replaceWith(editCard(entry, idx, false));
+      });
+      card.querySelector(".ldp-remove").addEventListener("click", function () {
+        if (!confirm("Remove this entry" + (entry.course ? " — “" + entry.course + "”" : "") + "? This cannot be undone.")) return;
+        var list = entriesFor(currentName);
+        var i = list.indexOf(entry);
+        if (i > -1) list.splice(i, 1);
+        saveLd();
+        renderEntries();
+        renderFolders();
+      });
+      return card;
+    }
+
+    /* editable card — nothing is written to state until Save is clicked */
+    function editCard(entry, idx, isNew) {
+      var card = document.createElement("div");
+      card.className = "ldp-entry is-editing";
+      card.innerHTML =
+        '<div class="ldp-entry-head"><span class="ldp-entry-num">Entry ' + (idx + 1) + '</span></div>' +
+        fieldsHtml() +
+        '<div class="dlg-foot">' +
+          '<button class="btn quiet ldp-cancel" type="button">Cancel</button>' +
+          '<button class="btn primary ldp-save" type="button">Save</button>' +
         '</div>';
 
       card.querySelector(".ldp-course").value = entry.course || "";
@@ -2755,23 +2819,22 @@
       card.querySelector(".ldp-status").value = entry.status || "";
       card.querySelector(".ldp-remarks").value = entry.remarks || "";
       updateWc(card);
+      card.querySelector(".ldp-remarks").addEventListener("input", function () { updateWc(card); });
 
-      card.querySelector(".ldp-course").addEventListener("input", function (ev) {
-        entry.course = ev.target.value; saveLd(); renderFolders();
+      card.querySelector(".ldp-cancel").addEventListener("click", function () {
+        if (isNew) {
+          card.remove();
+          if (!entriesWrap.querySelector(".ldp-entry")) renderEntries();
+        } else {
+          card.replaceWith(viewCard(entry, idx));
+        }
       });
-      card.querySelector(".ldp-source").addEventListener("change", function (ev) {
-        entry.source = ev.target.value; saveLd();
-      });
-      card.querySelector(".ldp-status").addEventListener("change", function (ev) {
-        entry.status = ev.target.value; saveLd();
-      });
-      card.querySelector(".ldp-remarks").addEventListener("input", function (ev) {
-        entry.remarks = ev.target.value; updateWc(card); saveLd();
-      });
-      card.querySelector(".ldp-remove").addEventListener("click", function () {
-        var list = entriesFor(currentName);
-        var i = list.indexOf(entry);
-        if (i > -1) list.splice(i, 1);
+      card.querySelector(".ldp-save").addEventListener("click", function () {
+        entry.course = card.querySelector(".ldp-course").value.trim();
+        entry.source = card.querySelector(".ldp-source").value;
+        entry.status = card.querySelector(".ldp-status").value;
+        entry.remarks = card.querySelector(".ldp-remarks").value;
+        if (isNew) entriesFor(currentName).push(entry);
         saveLd();
         renderEntries();
         renderFolders();
@@ -2785,27 +2848,24 @@
       if (!list.length) {
         var empty = document.createElement("p");
         empty.className = "ld-prompt";
+        empty.id = "ldp-empty-msg";
         empty.textContent = "Nothing logged yet for " + currentName + ". Use the button below to add a course or workshop.";
         entriesWrap.appendChild(empty);
       } else {
-        list.forEach(function (entry, idx) { entriesWrap.appendChild(entryCard(entry, idx)); });
+        list.forEach(function (entry, idx) { entriesWrap.appendChild(viewCard(entry, idx)); });
       }
       countLabel.textContent = list.length + (list.length === 1 ? " logged" : " logged");
     }
 
     addBtn.addEventListener("click", function () {
       var list = entriesFor(currentName);
-      list.push({ id: ldUid(), course: "", source: "", status: "", remarks: "" });
-      saveLd();
-      renderEntries();
-      renderFolders();
-      var cards = entriesWrap.querySelectorAll(".ldp-entry");
-      var last = cards[cards.length - 1];
-      if (last) {
-        var inp = last.querySelector(".ldp-course");
-        if (inp) inp.focus();
-        last.scrollIntoView({ behavior: "smooth", block: "center" });
-      }
+      var emptyMsg = document.getElementById("ldp-empty-msg");
+      if (emptyMsg) emptyMsg.remove();
+      var card = editCard({ id: ldUid(), course: "", source: "", status: "", remarks: "" }, list.length, true);
+      entriesWrap.appendChild(card);
+      var inp = card.querySelector(".ldp-course");
+      if (inp) inp.focus();
+      card.scrollIntoView({ behavior: "smooth", block: "center" });
     });
 
     ldPersonHandler = function (name) {
