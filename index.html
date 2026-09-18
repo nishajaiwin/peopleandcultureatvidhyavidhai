@@ -385,6 +385,32 @@
   .ld-legend{margin:14px 0 0;font-size:12.5px;color:var(--ink-soft);line-height:1.55}
   .stack{display:flex;flex-direction:column;gap:18px}
 
+  /* Learning & Development — per-employee folders */
+  .ld-folders{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px}
+  .ld-folder{
+    text-align:left;display:flex;align-items:center;gap:11px;
+    background:var(--card);border:1px solid var(--line);border-radius:3px;
+    padding:12px 13px;cursor:pointer;transition:border-color .2s ease,background .2s ease,transform .2s ease;
+  }
+  .ld-folder:hover{border-color:var(--accent);background:#FDF8EC;transform:translateY(-2px)}
+  .ld-folder svg{width:19px;height:15px;flex:0 0 auto;color:var(--marigold)}
+  .ld-folder-txt{display:flex;flex-direction:column;gap:2px;min-width:0}
+  .ld-folder-name{font-size:13.5px;font-weight:600;line-height:1.25;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .ld-folder-sub{font-size:11px;color:var(--ink-soft)}
+
+  /* Learning & Development — single-employee editable page */
+  .ldp-entries{display:flex;flex-direction:column;gap:16px;margin-bottom:16px}
+  .ldp-entry{background:var(--card);border:1px solid var(--line);border-radius:3px;padding:16px 18px 18px}
+  .ldp-entry-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+  .ldp-entry-num{font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft)}
+  .ldp-remove{
+    background:none;border:1px solid transparent;color:var(--ink-soft);cursor:pointer;
+    font-size:17px;line-height:1;padding:2px 8px;border-radius:3px;
+  }
+  .ldp-remove:hover{color:#8A3D25;background:#F6DCD4;border-color:#F6DCD4}
+  .ldp-wc{font-weight:400;text-transform:none;letter-spacing:0;font-size:11px;color:var(--ink-soft);float:right}
+  .ldp-wc.over{color:#8A3D25;font-weight:700}
+
   .board-hint{margin:0;padding:13px 18px 0;font-family:var(--display);font-style:italic;font-size:14.5px;color:var(--ink-soft)}
   .board{display:flex;gap:13px;overflow-x:auto;padding:16px 18px 20px;align-items:flex-start}
 
@@ -492,6 +518,9 @@
       <ellipse cx="12" cy="6.6" rx="3" ry="4.6" transform="rotate(288 12 12)"/>
     </g>
     <circle cx="12" cy="12" r="2.2" fill="#C98F12"/>
+  </symbol>
+  <symbol id="folder-icon" viewBox="0 0 20 16">
+    <path fill="currentColor" d="M1 2.5C1 1.67 1.67 1 2.5 1H7.4c.5 0 .96.24 1.25.65L9.6 3H17.5c.83 0 1.5.67 1.5 1.5v9c0 .83-.67 1.5-1.5 1.5h-15C1.67 15 1 14.33 1 13.5v-11Z"/>
   </symbol>
 </svg>
 
@@ -819,6 +848,38 @@
   </section>
 
   <section class="group">
+    <div class="group-head"><h2>Open a file</h2><span>25 people</span></div>
+    <p class="ld-prompt" style="margin-bottom:14px">Select a name to open that person's own page — log a course or workshop, its source, its status, and a few words on how it went. Saved to this browser only, the same as the applicant tracker.</p>
+    <div class="ld-folders" id="ld-folders">
+      <button class="ld-folder" type="button" data-person="Gayathri"><svg aria-hidden="true"><use href="#folder-icon"/></svg><span class="ld-folder-txt"><span class="ld-folder-name">Gayathri</span><span class="ld-folder-sub"></span></span></button>
+      <button class="ld-folder" type="button" data-person="Gomathi"><svg aria-hidden="true"><use href="#folder-icon"/></svg><span class="ld-folder-txt"><span class="ld-folder-name">Gomathi</span><span class="ld-folder-sub"></span></span></button>
+      <button class="ld-folder" type="button" data-person="Johanson"><svg aria-hidden="true"><use href="#folder-icon"/></svg><span class="ld-folder-txt"><span class="ld-folder-name">Johanson</span><span class="ld-folder-sub"></span></span></button>
+      <button class="ld-folder" type="button" data-person="Juno"><svg aria-hidden="true"><use href="#folder-icon"/></svg><span class="ld-folder-txt"><span class="ld-folder-name">Juno</span><span class="ld-folder-sub"></span></span></button>
+      <button class="ld-folder" type="button" data-person="Karunya"><svg aria-hidden="true"><use href="#folder-icon"/></svg><span class="ld-folder-txt"><span class="ld-folder-name">Karunya</span><span class="ld-folder-sub"></span></span></button>
+      <button class="ld-folder" type="button" data-person="Mahesh Kumar"><svg aria-hidden="true"><use href="#folder-icon"/></svg><span class="ld-folder-txt"><span class="ld-folder-name">Mahesh Kumar</span><span class="ld-folder-sub"></span></span></button>
+      <button class="ld-folder" type="button" data-person="Mathivathani"><svg aria-hidden="true"><use href="#folder-icon"/></svg><span class="ld-folder-txt"><span class="ld-folder-name">Mathivathani</span><span class="ld-folder-sub"></span></span></button>
+      <button class="ld-folder" type="button" data-person="Meghna"><svg aria-hidden="true"><use href="#folder-icon"/></svg><span class="ld-folder-txt"><span class="ld-folder-name">Meghna</span><span class="ld-folder-sub"></span></span></button>
+      <button class="ld-folder" type="button" data-person="Monisha"><svg aria-hidden="true"><use href="#folder-icon"/></svg><span class="ld-folder-txt"><span class="ld-folder-name">Monisha</span><span class="ld-folder-sub"></span></span></button>
+      <button class="ld-folder" type="button" data-person="Narmadha"><svg aria-hidden="true"><use href="#folder-icon"/></svg><span class="ld-folder-txt"><span class="ld-folder-name">Narmadha</span><span class="ld-folder-sub"></span></span></button>
+      <button class="ld-folder" type="button" data-person="Nisha"><svg aria-hidden="true"><use href="#folder-icon"/></svg><span class="ld-folder-txt"><span class="ld-folder-name">Nisha</span><span class="ld-folder-sub"></span></span></button>
+      <button class="ld-folder" type="button" data-person="Poomuthu"><svg aria-hidden="true"><use href="#folder-icon"/></svg><span class="ld-folder-txt"><span class="ld-folder-name">Poomuthu</span><span class="ld-folder-sub"></span></span></button>
+      <button class="ld-folder" type="button" data-person="Preethi"><svg aria-hidden="true"><use href="#folder-icon"/></svg><span class="ld-folder-txt"><span class="ld-folder-name">Preethi</span><span class="ld-folder-sub"></span></span></button>
+      <button class="ld-folder" type="button" data-person="Pushpathy"><svg aria-hidden="true"><use href="#folder-icon"/></svg><span class="ld-folder-txt"><span class="ld-folder-name">Pushpathy</span><span class="ld-folder-sub"></span></span></button>
+      <button class="ld-folder" type="button" data-person="Ram"><svg aria-hidden="true"><use href="#folder-icon"/></svg><span class="ld-folder-txt"><span class="ld-folder-name">Ram</span><span class="ld-folder-sub"></span></span></button>
+      <button class="ld-folder" type="button" data-person="Rajesh"><svg aria-hidden="true"><use href="#folder-icon"/></svg><span class="ld-folder-txt"><span class="ld-folder-name">Rajesh</span><span class="ld-folder-sub"></span></span></button>
+      <button class="ld-folder" type="button" data-person="Ravi Kumar"><svg aria-hidden="true"><use href="#folder-icon"/></svg><span class="ld-folder-txt"><span class="ld-folder-name">Ravi Kumar</span><span class="ld-folder-sub"></span></span></button>
+      <button class="ld-folder" type="button" data-person="Regi"><svg aria-hidden="true"><use href="#folder-icon"/></svg><span class="ld-folder-txt"><span class="ld-folder-name">Regi</span><span class="ld-folder-sub"></span></span></button>
+      <button class="ld-folder" type="button" data-person="Sabaritha"><svg aria-hidden="true"><use href="#folder-icon"/></svg><span class="ld-folder-txt"><span class="ld-folder-name">Sabaritha</span><span class="ld-folder-sub"></span></span></button>
+      <button class="ld-folder" type="button" data-person="Saktheeswaran"><svg aria-hidden="true"><use href="#folder-icon"/></svg><span class="ld-folder-txt"><span class="ld-folder-name">Saktheeswaran</span><span class="ld-folder-sub"></span></span></button>
+      <button class="ld-folder" type="button" data-person="Saravana Kumar"><svg aria-hidden="true"><use href="#folder-icon"/></svg><span class="ld-folder-txt"><span class="ld-folder-name">Saravana Kumar</span><span class="ld-folder-sub"></span></span></button>
+      <button class="ld-folder" type="button" data-person="Satya Moorthy"><svg aria-hidden="true"><use href="#folder-icon"/></svg><span class="ld-folder-txt"><span class="ld-folder-name">Satya Moorthy</span><span class="ld-folder-sub"></span></span></button>
+      <button class="ld-folder" type="button" data-person="Sharon"><svg aria-hidden="true"><use href="#folder-icon"/></svg><span class="ld-folder-txt"><span class="ld-folder-name">Sharon</span><span class="ld-folder-sub"></span></span></button>
+      <button class="ld-folder" type="button" data-person="Vanmathi"><svg aria-hidden="true"><use href="#folder-icon"/></svg><span class="ld-folder-txt"><span class="ld-folder-name">Vanmathi</span><span class="ld-folder-sub"></span></span></button>
+      <button class="ld-folder" type="button" data-person="Vidhya"><svg aria-hidden="true"><use href="#folder-icon"/></svg><span class="ld-folder-txt"><span class="ld-folder-name">Vidhya</span><span class="ld-folder-sub"></span></span></button>
+    </div>
+  </section>
+
+  <section class="group">
     <div class="group-head"><h2>Course and fellowship register</h2><span>25 people</span></div>
     <div class="ld-controls">
       <label class="ld-pick">
@@ -918,6 +979,29 @@
         <p>A place has been requested but not yet confirmed. <strong>Incomplete</strong> means started and not finished; <strong>Completed</strong> means finished.</p>
       </div>
     </div>
+  </section>
+</div>
+
+<!-- ============ Learning & Development — single employee ============ -->
+<div class="page wide" id="view-ld-person" hidden>
+  <header class="ats-head">
+    <div class="brand">
+      <button class="back" type="button" data-goto="learning">
+        <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M11 6H1M5.5 1.5 1 6l4.5 4.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Learning &amp; Development
+      </button>
+      <h1 id="ldp-name">&nbsp;</h1>
+    </div>
+    <div class="source-note">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M2.5 3.2C4.3 2.3 6.4 2.4 8 3.4c1.6-1 3.7-1.1 5.5-.2v9c-1.8-.9-3.9-.8-5.5.2-1.6-1-3.7-1.1-5.5-.2z" stroke-linejoin="round"/><path d="M8 3.4v9.2"/></svg>
+      <p>This person's own file. Saved to this browser only — like the applicant tracker, nothing here is uploaded or shared with other devices.</p>
+    </div>
+  </header>
+
+  <section class="group">
+    <div class="group-head"><h2>Courses &amp; fellowships</h2><span id="ldp-count">0 logged</span></div>
+    <div class="ldp-entries" id="ldp-entries"></div>
+    <button class="btn" type="button" id="ldp-add">+ Add another course or workshop</button>
   </section>
 </div>
 
@@ -2421,11 +2505,22 @@
   });
 
   var VIEWS = ["dash", "ats", "policies", "rewards", "learning", "performance"];
+  var ldPersonHandler = null; // set once the learning-register script below runs
   function show(view) {
     VIEWS.forEach(function (v) {
       document.getElementById("view-" + v).hidden = (v !== view);
     });
+    var ldp = document.getElementById("view-ld-person");
+    if (ldp) ldp.hidden = true;
     window.scrollTo(0, 0);
+  }
+  function showLdPerson(name) {
+    VIEWS.forEach(function (v) {
+      document.getElementById("view-" + v).hidden = true;
+    });
+    document.getElementById("view-ld-person").hidden = false;
+    window.scrollTo(0, 0);
+    if (ldPersonHandler) ldPersonHandler(name);
   }
   document.getElementById("open-ats").addEventListener("click", function () {
     location.hash = "#ats";
@@ -2441,6 +2536,10 @@
   });
   function route() {
     var h = location.hash.replace("#", "");
+    if (h.indexOf("learning/") === 0) {
+      showLdPerson(decodeURIComponent(h.slice("learning/".length)));
+      return;
+    }
     show(VIEWS.indexOf(h) > 0 ? h : "dash");
   }
   window.addEventListener("hashchange", route);
@@ -2499,6 +2598,176 @@
       });
     });
     apply();
+  })();
+
+  /* learning register: each employee's own file — course, source, status, remarks */
+  (function () {
+    var entriesWrap = document.getElementById("ldp-entries");
+    if (!entriesWrap) return;
+
+    var LD_KEY = "vv-ld-v1";
+    var idSeq = 0;
+    function ldUid() { idSeq++; return "ldp" + Date.now().toString(36) + idSeq; }
+
+    function seedEntries() {
+      function e(course, source, status) {
+        return { id: ldUid(), course: course, source: source, status: status, remarks: "" };
+      }
+      return {
+        "Gayathri": [e("Science workshop — APU", "SD", "completed"), e("Aadhaar Ganit — Foundational Numeracy", "SD", "applied")],
+        "Gomathi": [e("Data management — CoLab", "OR", "ongoing")],
+        "Johanson": [e("Designing contextual programs", "SD", "")],
+        "Karunya": [e("AI workshop — Tech4good", "OR", "completed")],
+        "Mahesh Kumar": [e("Atma workshop", "OR", "completed")],
+        "Mathivathani": [e("Stakeholder Management", "SD", "")],
+        "Meghna": [e("Shikshagraha", "OR", "")],
+        "Monisha": [e("Storytelling Fellowship", "OR", "applied")],
+        "Preethi": [e("Adobe", "OR", "completed"), e("Storytelling Fellowship", "OR", "applied")],
+        "Sabaritha": [e("Wellbeing workshop — Wipro", "OR", "completed")],
+        "Sharon": [e("Shikshagraha", "OR", "")],
+        "Vidhya": [e("Wellbeing workshop — Wipro", "OR", "completed"), e("Aadhaar Ganit — Foundational Numeracy", "SD", "applied")]
+      };
+    }
+
+    function loadLd() {
+      var raw = null;
+      try { raw = localStorage.getItem(LD_KEY); } catch (err) { raw = null; }
+      if (raw) {
+        try {
+          var parsed = JSON.parse(raw);
+          if (parsed && parsed.entries) return parsed;
+        } catch (err) { /* fall through to the seed */ }
+      }
+      return { version: 1, entries: seedEntries() };
+    }
+    function saveLd() {
+      try { localStorage.setItem(LD_KEY, JSON.stringify(ldState)); } catch (err) { /* storage blocked */ }
+    }
+
+    var ldState = loadLd();
+    function entriesFor(name) {
+      if (!ldState.entries[name]) ldState.entries[name] = [];
+      return ldState.entries[name];
+    }
+
+    var folders = Array.prototype.slice.call(document.querySelectorAll(".ld-folder"));
+    function renderFolders() {
+      folders.forEach(function (b) {
+        var n = entriesFor(b.dataset.person).length;
+        var sub = b.querySelector(".ld-folder-sub");
+        sub.textContent = n === 0 ? "Nothing logged" : (n + (n === 1 ? " course" : " courses"));
+      });
+    }
+    folders.forEach(function (b) {
+      b.addEventListener("click", function () {
+        location.hash = "#learning/" + encodeURIComponent(b.dataset.person);
+      });
+    });
+
+    var nameHeading = document.getElementById("ldp-name");
+    var countLabel = document.getElementById("ldp-count");
+    var addBtn = document.getElementById("ldp-add");
+    var currentName = null;
+
+    function wordCount(s) {
+      var t = s.trim();
+      return t === "" ? 0 : t.split(/\s+/).length;
+    }
+    function updateWc(card) {
+      var wc = card.querySelector(".ldp-wc");
+      var n = wordCount(card.querySelector(".ldp-remarks").value);
+      wc.textContent = n + " / 500 words";
+      wc.classList.toggle("over", n > 500);
+    }
+
+    function entryCard(entry, idx) {
+      var card = document.createElement("div");
+      card.className = "ldp-entry";
+      card.innerHTML =
+        '<div class="ldp-entry-head"><span class="ldp-entry-num">Entry ' + (idx + 1) + '</span>' +
+        '<button class="ldp-remove" type="button" title="Remove this entry" aria-label="Remove this entry">&times;</button></div>' +
+        '<div class="fields">' +
+          '<div class="field full"><label>Course / workshop</label>' +
+          '<input type="text" class="ldp-course" maxlength="200" placeholder="e.g. Foundational Numeracy — Aadhaar Ganit"></div>' +
+          '<div class="field"><label>Source</label><select class="ldp-source">' +
+            '<option value="">Choose…</option><option value="OR">OR — Organisation recommended</option><option value="SD">SD — Self directed</option>' +
+          '</select></div>' +
+          '<div class="field"><label>Status</label><select class="ldp-status">' +
+            '<option value="">Choose…</option><option value="applied">Applied</option><option value="ongoing">Ongoing</option><option value="dropped">Dropped</option><option value="completed">Completed</option>' +
+          '</select></div>' +
+          '<div class="field full"><label>Remarks <span class="ldp-wc">0 / 500 words</span></label>' +
+          '<textarea class="ldp-remarks" rows="5" placeholder="What was this program like? What did you take from it? (about 500 words)"></textarea></div>' +
+        '</div>';
+
+      card.querySelector(".ldp-course").value = entry.course || "";
+      card.querySelector(".ldp-source").value = entry.source || "";
+      card.querySelector(".ldp-status").value = entry.status || "";
+      card.querySelector(".ldp-remarks").value = entry.remarks || "";
+      updateWc(card);
+
+      card.querySelector(".ldp-course").addEventListener("input", function (ev) {
+        entry.course = ev.target.value; saveLd(); renderFolders();
+      });
+      card.querySelector(".ldp-source").addEventListener("change", function (ev) {
+        entry.source = ev.target.value; saveLd();
+      });
+      card.querySelector(".ldp-status").addEventListener("change", function (ev) {
+        entry.status = ev.target.value; saveLd();
+      });
+      card.querySelector(".ldp-remarks").addEventListener("input", function (ev) {
+        entry.remarks = ev.target.value; updateWc(card); saveLd();
+      });
+      card.querySelector(".ldp-remove").addEventListener("click", function () {
+        var list = entriesFor(currentName);
+        var i = list.indexOf(entry);
+        if (i > -1) list.splice(i, 1);
+        saveLd();
+        renderEntries();
+        renderFolders();
+      });
+      return card;
+    }
+
+    function renderEntries() {
+      var list = entriesFor(currentName);
+      entriesWrap.textContent = "";
+      if (!list.length) {
+        var empty = document.createElement("p");
+        empty.className = "ld-prompt";
+        empty.textContent = "Nothing logged yet for " + currentName + ". Use the button below to add a course or workshop.";
+        entriesWrap.appendChild(empty);
+      } else {
+        list.forEach(function (entry, idx) { entriesWrap.appendChild(entryCard(entry, idx)); });
+      }
+      countLabel.textContent = list.length + (list.length === 1 ? " logged" : " logged");
+    }
+
+    addBtn.addEventListener("click", function () {
+      var list = entriesFor(currentName);
+      list.push({ id: ldUid(), course: "", source: "", status: "", remarks: "" });
+      saveLd();
+      renderEntries();
+      renderFolders();
+      var cards = entriesWrap.querySelectorAll(".ldp-entry");
+      var last = cards[cards.length - 1];
+      if (last) {
+        var inp = last.querySelector(".ldp-course");
+        if (inp) inp.focus();
+        last.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+    });
+
+    ldPersonHandler = function (name) {
+      if (!(name in ldState.entries) && folders.every(function (b) { return b.dataset.person !== name; })) {
+        location.hash = "#learning";
+        return;
+      }
+      currentName = name;
+      nameHeading.textContent = name;
+      renderEntries();
+    };
+
+    renderFolders();
   })();
 
   /* dashboard card filter */
