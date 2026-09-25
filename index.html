@@ -1012,6 +1012,37 @@
     <button class="btn" type="button" id="clear-demo">Back to my roles</button>
   </div>
 
+  <section class="snapshot in-ats" aria-labelledby="open-h">
+    <div class="snapshot-head">
+      <h2 id="open-h">Openings, 2026–27</h2>
+      <p class="sample-note">From applications to apply@vidhyavidhai.org, as logged in the Hiring Tracker · updated 25 Sep 2026</p>
+    </div>
+    <div class="tiles">
+      <div class="tile"><b>11</b><span>Openings this cycle</span></div>
+      <div class="tile"><b>6</b><span>Positions filled</span></div>
+      <div class="tile"><b>5</b><span>Still open</span></div>
+      <div class="tile"><b>3</b><span>Open roles in the interview process</span></div>
+    </div>
+    <div class="rw-wrap" style="margin-top:16px">
+      <table class="rw">
+        <thead><tr><th>Role</th><th>Openings</th><th>Filled</th><th>Status</th><th>Where it stands</th></tr></thead>
+        <tbody>
+          <tr><td>District Lead — Viluppuram</td><td class="num">1</td><td class="num">0</td><td>Interviewing</td><td>Candidate interviewed 9 Sep, assessed a strong fit; pre-work and salary conversation next</td></tr>
+          <tr><td>Communication Strategist</td><td class="num">1</td><td class="num">0</td><td>Interviewing</td><td>About 30 applications; shortlisted candidates on pre-work, several on hold</td></tr>
+          <tr><td>DEEP Coordinator</td><td class="num">1</td><td class="num">0</td><td>Interviewing</td><td>One candidate cleared the first round and moves to the second</td></tr>
+          <tr><td>DEEP Lead</td><td class="num">1</td><td class="num">0</td><td>Screening</td><td>Application received; first round not yet scheduled</td></tr>
+          <tr><td>Programme Design Lead</td><td class="num">1</td><td class="num">0</td><td>Screening</td><td>Two applications; acknowledgements not yet sent</td></tr>
+          <tr><td>District Lead — Cuddalore</td><td class="num">1</td><td class="num">1</td><td>Filled</td><td>Joined September 2026</td></tr>
+          <tr><td>District Lead — Sivagangai</td><td class="num">1</td><td class="num">1</td><td>Filled</td><td>Joined September 2026</td></tr>
+          <tr><td>Programme Implementation Lead</td><td class="num">1</td><td class="num">1</td><td>Filled</td><td>Joined September 2026</td></tr>
+          <tr><td>Monitoring &amp; Evaluation</td><td class="num">1</td><td class="num">1</td><td>Filled</td><td>Joined September 2026</td></tr>
+          <tr><td>Growth &amp; Partnerships Lead</td><td class="num">1</td><td class="num">1</td><td>Filled</td><td>Joined September 2026</td></tr>
+          <tr><td>HR Intern</td><td class="num">1</td><td class="num">1</td><td>Filled</td><td>Onboarded as intern</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
   <section class="snapshot in-ats" aria-labelledby="snap-h">
     <div class="snapshot-head">
       <h2 id="snap-h">Hiring snapshot</h2>
@@ -1770,7 +1801,7 @@
   };
 
   var KEY = "vv-ats-v1";
-  var SEED = 2;
+  var SEED = 3;
   var state = null;
   var selectedRole = null;
   var candQuery = "";
@@ -1835,8 +1866,11 @@
     return {
       version: 1, seed: SEED, demo: false,
       roles: [
-        { id: uid(), title: "District Lead", location: "", openings: 1 },
-        { id: uid(), title: "Communication Strategist", location: "", openings: 1 }
+        { id: uid(), title: "District Lead", location: "Viluppuram", openings: 1 },
+        { id: uid(), title: "Communication Strategist", location: "", openings: 1 },
+        { id: uid(), title: "DEEP Coordinator", location: "", openings: 1 },
+        { id: uid(), title: "DEEP Lead", location: "", openings: 1 },
+        { id: uid(), title: "Programme Design Lead", location: "", openings: 1 }
       ],
       candidates: []
     };
