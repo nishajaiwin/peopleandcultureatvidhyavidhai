@@ -343,6 +343,17 @@
   .rw td.num{font-variant-numeric:tabular-nums;font-weight:600;white-space:nowrap;color:var(--accent-deep)}
   .rw td:first-child{font-weight:600}
   .rw tbody tr:hover{background:#FDF8EC}
+
+  /* Performance Review Policy lock */
+  .pm-lock{max-width:440px;margin:48px auto;padding:32px 28px;background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);text-align:center}
+  .pm-lock svg{width:34px;height:34px;color:var(--accent)}
+  .pm-lock h2{font-family:var(--display);font-weight:500;font-size:1.5rem;margin:10px 0 6px}
+  .pm-lock p{color:var(--ink-soft);margin:0 0 18px}
+  .pm-lock form{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+  .pm-lock input{flex:1 1 200px;font:inherit;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--ink)}
+  .pm-lock .pm-err{color:#A33A2A;margin:14px 0 0}
+  .pm-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  .card .lock-tag{font-size:.78em;margin-left:4px}
   /* Performance Review Policy */
   .pr-flow{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:14px}
   .pr-flow li{font-size:14px;line-height:1.5}
@@ -721,7 +732,7 @@
         <div class="card-foot">
           <p class="live-line">Quarterly cycle</p>
           <button class="open-ats" type="button" data-goto="performance">
-            Performance Review Policy
+            Performance Review Policy <span class="lock-tag" aria-label="locked">&#128274;</span>
             <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M1 6h10M6.5 1.5 11 6l-4.5 4.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
         </div>
@@ -1359,182 +1370,20 @@
       <p>The VVF Performance Review Policy book, kept by People &amp; Culture. The source document remains the authority where the two differ.</p>
     </div>
   </header>
-
-  <section class="group">
-    <div class="group-head"><h2>1. Objective of the Performance Review</h2></div>
-    <p>The Performance Review (PR) system at Vidhya Vidhai Foundation is designed to:</p>
-    <ul class="contents">
-      <li>Recognize meaningful contributions and key achievements</li>
-      <li>Support individual growth with constructive, evidence-based feedback</li>
-      <li>Deepen alignment with the organization's mission and values</li>
-      <li>Enable transparent dialogue between team members and leads / founders</li>
-      <li>Inform decisions around growth paths, learning needs, and support systems</li>
-    </ul>
-    <p><a href="https://drive.google.com/file/d/1iAukAq2iY0-y2EaBvVf6xqZp5MT2R6kn/view?usp=drive_link" target="_blank" rel="noopener">Flow chart of the PR process →</a></p>
+  <section class="pm-lock" id="pm-lock">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="5" y="10.5" width="14" height="10" rx="2"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3" stroke-linecap="round"/></svg>
+    <h2>For HR leads only</h2>
+    <p>The Performance Review Policy is locked. Enter the People &amp; Culture password to open it.</p>
+    <form id="pm-form" autocomplete="off">
+      <label for="pm-pw" class="pm-sr">Password</label>
+      <input id="pm-pw" type="password" placeholder="Password" required>
+      <button class="open-ats" type="submit">Unlock</button>
+    </form>
+    <p class="pm-err" id="pm-err" role="alert" hidden>That password did not work. Ask Karunya.</p>
   </section>
-
-  <section class="group">
-    <div class="group-head"><h2>2. Core Components of the PR System</h2></div>
-    <div class="rw-wrap">
-      <table class="rw">
-        <thead><tr><th scope="col">Component</th><th scope="col">Focus</th><th scope="col">Frequency</th></tr></thead>
-        <tbody>
-          <tr><td>Individual Performance</td><td>Role-based contributions, outcomes, challenges, skill growth, peer feedback</td><td>Quarterly with monthly peer feedback</td></tr>
-          <tr><td>Organizational Alignment</td><td>Values demonstrated, team contribution, culture fit</td><td>Quarterly</td></tr>
-          <tr><td>Development Planning</td><td>Learning, support, and future goals</td><td>Quarterly</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-
-  <section class="group">
-    <div class="group-head"><h2>3. Process Flow Overview</h2></div>
-    <ol class="pr-flow">
-      <li><b>Pre-Review Prep</b>
-        <ul class="contents">
-          <li>Team member updates PR form (deliverables, goals, and reflections)</li>
-          <li>Manager reviews trackers and prior reviews</li>
-          <li>Founders review self assessment, manager's reviews, prior reviews and peer reviews</li>
-        </ul>
-      </li>
-      <li><b>Performance Conversation (Segment 1)</b>
-        <ul class="contents">
-          <li>Highlight of the quarter</li>
-          <li>Evidence-backed achievements</li>
-          <li>Areas for improvement</li>
-          <li>Overcome challenges</li>
-          <li>Weekly Review/Goal check, OKRs, IDP status</li>
-          <li>Incorporate Monthly Peer Reviews</li>
-        </ul>
-      </li>
-      <li><b>Organizational Alignment Conversation (Segment 2)</b>
-        <ul class="contents">
-          <li>Discussion on values-based behaviors</li>
-          <li>Culture contributions and interpersonal reflections</li>
-        </ul>
-      </li>
-      <li><b>Mutual Feedback + Development Planning</b>
-        <ul class="contents">
-          <li>Goals setting and L&amp;D support</li>
-          <li>Open feedback exchange</li>
-        </ul>
-      </li>
-      <li><b>Documentation &amp; Sign-off</b>
-        <ul class="contents">
-          <li>Summary saved for reference and tracking</li>
-        </ul>
-      </li>
-    </ol>
-  </section>
-
-  <section class="group">
-    <div class="group-head"><h2>4. Segment 1: Individual Performance</h2></div>
-    <p>Purpose: to assess outcomes and contributions made in alignment with defined roles and goals. This includes self-assessment (quarterly), manager review (quarterly), and peer reviews gathered monthly.</p>
-    <div class="rw-wrap">
-      <table class="rw">
-        <thead><tr><th scope="col">Section</th><th scope="col">Why it Matters</th><th scope="col">To Be Filled By</th><th scope="col">Sample Questions</th></tr></thead>
-        <tbody>
-          <tr><td>Highlight of the quarter</td><td>Identifies standout moments and meaningful contributions</td><td>Self &amp; Manager</td><td>What accomplishment are you most proud of and why? Which moment gave you the most joy or fulfillment? What do you believe made the biggest impact on your team or project? Was there an instance where you exceeded your own expectations?</td></tr>
-          <tr><td>Goals Met / Not Met</td><td>Measures goal completion and reflection</td><td>Self &amp; Manager</td><td>Which goals did you fully accomplish? What enabled that success? Which goals were partially or not achieved? Why? Were there any goals you had to adapt or reprioritize? What patterns do you notice in how you approach goals?</td></tr>
-          <tr><td>Evidence of Performance</td><td>Ensures accountability and substantiates claims</td><td>Self</td><td>What files, reports, trackers, or outputs support your performance? Can you share any stakeholder testimonials or outcomes? What tools or documentation reflect your day-to-day contributions? Were there feedback notes that align with your key achievements?</td></tr>
-          <tr><td>Area for Improvement (AFI)</td><td>Fuels a growth mindset and honesty</td><td>Self &amp; Manager</td><td>Which areas do you think need more focus or strengthening? What feedback have you received consistently? Are there tasks or skills you found challenging? How do you plan to address these areas in the next cycle?</td></tr>
-          <tr><td>Challenges Faced / Overcome</td><td>Builds empathy, resilience, and narrative of growth</td><td>Self &amp; Manager</td><td>What were the toughest moments or blockers this cycle? How did you approach and manage these situations? What internal or external support helped you overcome them? What did these challenges teach you about your role or approach?</td></tr>
-          <tr><td>Skill &amp; Development Tracking</td><td>Tracks personal growth over time</td><td>Self</td><td>What new skills did you learn or improve upon? What learning methods or opportunities were most useful? Which PDP goals did you progress on? Where do you feel more confident now than before?</td></tr>
-          <tr><td>Peer Reviews Summary</td><td>Adds 360-degree perspective on collaboration and behavior</td><td>Peers (Monthly), Manager (Summary)</td><td>What consistent themes emerged from your peer feedback? What strengths did peers recognize in you? Were there suggestions for collaboration, communication, or leadership? How have you acted upon feedback from your peers, if any?</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-
-  <section class="group">
-    <div class="group-head"><h2>5. Segment 2: Organizational Alignment (Values Assessment)</h2></div>
-    <p>Purpose: to recognize how each team member lives out the core values of Vidhya Vidhai in their daily work and relationships.</p>
-    <div class="rw-wrap">
-      <table class="rw">
-        <thead><tr><th scope="col">Value</th><th scope="col">What it Looks Like</th><th scope="col">Sample Prompts</th></tr></thead>
-        <tbody>
-          <tr><td>Respect &amp; Humility</td><td>Listens to stakeholders, team members, and everyone related to work; values local knowledge</td><td>How have you demonstrated respect toward school partners, community members, or colleagues? Can you share an example where you paused to understand someone's perspective before offering yours? How have you acknowledged or uplifted others' contributions or experiences? Have you noticed any moments where you could have practiced more humility?</td></tr>
-          <tr><td>Collective</td><td>Works collaboratively, facilitates team wins</td><td>What has been your most meaningful collaboration this cycle? How have you supported the success of others? Can you describe a situation where you co-created something with a peer or cross-functional team? How do you ensure your work aligns with the team's shared goals?</td></tr>
-          <tr><td>Perseverance</td><td>Shows consistency despite difficulties</td><td>Share a time when you had to keep going despite uncertainty, failure, or a slow process. What motivated you to stay consistent in that situation? How do you personally manage pressure, delays, or unexpected changes? Have you noticed any shift in your ability to bounce back this cycle?</td></tr>
-          <tr><td>Quality</td><td>Attention to detail, thoughtful delivery</td><td>What specific steps did you take to ensure the quality of a project or output? Can you share an example where feedback led you to improve your work? How do you approach quality in both content and process? In which part of your work do you see the highest quality reflected?</td></tr>
-          <tr><td>Ownership</td><td>Takes initiative, accountable, shapes solutions</td><td>Can you describe a moment where you took full responsibility for a task or decision? What initiative did you take that wasn't expected but made a difference? How have you held yourself accountable for results or outcomes? Have you influenced or improved any process or system proactively?</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <p class="purpose">Values Assessment Format: each value is scored against Self Reflection, Evidence/Stories, Manager Observation and Evidence/Stories, captured on the PR Template.</p>
-  </section>
-
-  <section class="group">
-    <div class="group-head"><h2>6. Development &amp; Commitment Planning</h2></div>
-    <div class="rw-wrap">
-      <table class="rw">
-        <thead><tr><th scope="col">Area</th><th scope="col">Self Input</th><th scope="col">Manager Input</th></tr></thead>
-        <tbody>
-          <tr><td>Learning goals for next cycle</td><td>Captured on the PR Template</td><td>Captured on the PR Template</td></tr>
-          <tr><td>Support needed</td><td>Captured on the PR Template</td><td>Captured on the PR Template</td></tr>
-          <tr><td>Growth aspirations</td><td>Captured on the PR Template</td><td>Captured on the PR Template</td></tr>
-          <tr><td>Timeline of commitment</td><td>Captured on the PR Template</td><td>Captured on the PR Template</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-
-  <section class="group">
-    <div class="group-head"><h2>7. 5-Point Narrative Scale for Appraisal</h2></div>
-    <div class="rw-wrap">
-      <table class="rw">
-        <thead><tr><th scope="col">Level</th><th scope="col">Level Name</th><th scope="col">Typical Profile</th><th scope="col">Key Characteristics</th></tr></thead>
-        <tbody>
-          <tr><td>Level 1</td><td>Foundational</td><td>Fresh graduate or early-career professional; new to VV or the development sector; still exploring skills and strengths</td><td>Learning-oriented; high need for scaffolding and feedback; limited scope of ownership; may assist in projects but not lead; still learning VV values and ways of working</td></tr>
-          <tr><td>Level 2</td><td>Contributing</td><td>1–3 years of experience; some time at VV (or similar org); ready to take responsibility for parts of a project</td><td>Manages segments of a project or task; shows initiative, takes feedback well; understands VV values and mission; may support peers or interns; developing autonomy in planning and execution</td></tr>
-          <tr><td>Level 3</td><td>Anchoring</td><td>Experienced and deeply embedded in VV's culture; seen as a go-to person or informal leader</td><td>Owns end-to-end projects or verticals; mentors or supports junior members; trusted by peers and stakeholders; operates with high autonomy and accountability; begins to influence systems and culture</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="rw-wrap" style="margin-top:14px">
-      <table class="rw">
-        <thead><tr><th scope="col">Rating</th><th scope="col">Label</th><th scope="col">Description</th><th scope="col">Suggested rate L1</th><th scope="col">Suggested rate L2</th><th scope="col">Suggested rate L3</th></tr></thead>
-        <tbody>
-          <tr><td class="num">5</td><td>Consistently Exemplary</td><td>Consistently demonstrates high-quality outcomes and strong alignment with VVF values. Often goes beyond what is expected, supports others, and raises the bar. Shows leadership in role.</td><td>8–10%</td><td>5–7%</td><td>3–5%</td></tr>
-          <tr><td class="num">4</td><td>Reliable &amp; Value-Aligned</td><td>Meets expectations with quality and care. Shows solid ownership, good collaboration, and lives the values well. Occasionally goes beyond role.</td><td>5–7%</td><td>3–5%</td><td>2–3%</td></tr>
-          <tr><td class="num">3</td><td>Emerging &amp; Learning</td><td>Meets many expectations but still builds consistency. Demonstrates potential and openness to growth. Requires structured feedback and support to fully embody values and responsibilities.</td><td>3–5%</td><td>1–3%</td><td>1–2%</td></tr>
-          <tr><td class="num">2</td><td>Needs Support to Grow</td><td>Struggles to meet expectations or show values-aligned behavior. Needs continuous support, closer guidance, or mindset shifts to perform effectively.</td><td>1–3%</td><td>0–1%</td><td>0–1%</td></tr>
-          <tr><td class="num">1</td><td>Critical Intervention Needed</td><td>Performance or behavior is significantly misaligned with role or values. Requires urgent and structured intervention, possibly a role reset or performance plan.</td><td>0%</td><td>0%</td><td>0%</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-
-  <section class="group">
-    <div class="group-head"><h2>8. Review Logistics &amp; Tools</h2></div>
-    <div class="rw-wrap">
-      <table class="rw">
-        <thead><tr><th scope="col">Tool</th><th scope="col">Description</th></tr></thead>
-        <tbody>
-          <tr><td><a href="https://docs.google.com/spreadsheets/d/1124xQuN1OPokE_Mt1Ij9w9n6K0vyK_Vs3DbjawUFp6A/edit?gid=0#gid=0" target="_blank" rel="noopener">PR Template</a></td><td>Google Sheet used for self &amp; manager inputs</td></tr>
-          <tr><td>Goal Tracker</td><td>VV's monthly goals and individual planner to track quarterly progress on goals and development</td></tr>
-          <tr><td><a href="https://docs.google.com/forms/d/e/1FAIpQLSf1WwZXXEi_yVFl6YdPz8ItkIZtH_ZSltGiGV8c_UPbpDPvaQ/viewform?usp=header" target="_blank" rel="noopener">Peer Feedback</a> (Optional)</td><td>Short monthly Google Form for qualitative input</td></tr>
-          <tr><td>IDP document</td><td>Used to reflect on professional development milestones</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-
-  <section class="group">
-    <div class="group-head"><h2>9. Roles &amp; Responsibilities</h2></div>
-    <div class="rw-wrap">
-      <table class="rw">
-        <thead><tr><th scope="col">Role</th><th scope="col">Responsibilities</th></tr></thead>
-        <tbody>
-          <tr><td>Team Member</td><td>Prepare self-reflection, provide evidence, co-own growth goals</td></tr>
-          <tr><td>Manager</td><td>Provide thoughtful feedback, validate achievements, support development</td></tr>
-          <tr><td>People &amp; Culture</td><td>Set timeline, support logistics, track follow-ups and insights</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-
-  <footer>
+  <div id="pm-content"></div>
+  <script type="application/json" id="pm-sealed">{"v":1,"iter":310000,"salt":"Zx5hD4omkHB8W9dWhw93zQ==","iv":"HIA5YrxayaB3yu9D","ct":"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"}</script>
+<footer>
     <p>Source: VVF_Performance_Review_Policy document</p>
     <p>A living document — changes are made from time to time</p>
   </footer>
@@ -2965,5 +2814,34 @@
 })();
 </script>
 
+
+<script>
+/* Performance Review Policy lock: decrypts the sealed section in the browser. */
+(function () {
+  var sealed = JSON.parse(document.getElementById("pm-sealed").textContent);
+  var lock = document.getElementById("pm-lock"), out = document.getElementById("pm-content");
+  var err = document.getElementById("pm-err"), input = document.getElementById("pm-pw");
+  function b64(s) { return Uint8Array.from(atob(s), function (ch) { return ch.charCodeAt(0); }); }
+  function open(pw) {
+    var enc = new TextEncoder();
+    return crypto.subtle.importKey("raw", enc.encode(pw), "PBKDF2", false, ["deriveKey"]).then(function (base) {
+      return crypto.subtle.deriveKey({ name: "PBKDF2", hash: "SHA-256", salt: b64(sealed.salt), iterations: sealed.iter },
+        base, { name: "AES-GCM", length: 256 }, false, ["decrypt"]);
+    }).then(function (key) {
+      return crypto.subtle.decrypt({ name: "AES-GCM", iv: b64(sealed.iv) }, key, b64(sealed.ct));
+    }).then(function (buf) {
+      out.innerHTML = new TextDecoder().decode(buf);
+      lock.hidden = true;
+      try { sessionStorage.setItem("pm-pw", pw); } catch (e) {}
+    });
+  }
+  document.getElementById("pm-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    err.hidden = true;
+    open(input.value).catch(function () { err.hidden = false; input.select(); });
+  });
+  try { var saved = sessionStorage.getItem("pm-pw"); if (saved) open(saved).catch(function () {}); } catch (e) {}
+})();
+</script>
 </body>
 </html>

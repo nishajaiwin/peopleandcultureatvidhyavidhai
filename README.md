@@ -22,5 +22,6 @@ Utilities written while building this page. Node stdlib only, no dependencies.
 | `pdftext.js` | Extracts text from a PDF, decoding per-font ToUnicode CMaps and recursing into Form XObjects. Used to read the Team Handbook. |
 | `xlsx.js` | Dumps an unpacked .xlsx to readable rows. |
 | `xlsxlib.js` | Writes a multi-sheet .xlsx (stored-ZIP, inline strings). |
+| `lock-performance.js` | Seals the Performance Review Policy view with a password (AES-256-GCM, PBKDF2). `node tools/lock-performance.js index.html <file holding the password>`. The password is never stored in this repo. |
 
 Usage: `node tools/pdftext.js input.pdf output.txt`
