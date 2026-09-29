@@ -502,6 +502,52 @@
   .report b{font-variant-numeric:tabular-nums}
   .report .warn{color:#8A3D25}
 
+  /* ATS tabs */
+  .ats-tabs{display:flex;gap:4px;margin:26px 0 0;border-bottom:1px solid var(--line);overflow-x:auto}
+  .ats-tab{font:inherit;font-size:13.5px;font-weight:600;color:var(--ink-soft);background:none;border:0;border-bottom:2px solid transparent;padding:10px 14px 9px;cursor:pointer;white-space:nowrap;display:flex;gap:7px;align-items:center}
+  .ats-tab:hover{color:var(--accent)}
+  .ats-tab[aria-selected="true"]{color:var(--accent-deep);border-bottom-color:var(--marigold)}
+  .ats-tab .n{font-size:11px;font-weight:700;background:var(--grey-soft);color:var(--ink-soft);border-radius:10px;padding:1px 7px;font-variant-numeric:tabular-nums}
+  .ats-tab[aria-selected="true"] .n{background:var(--marigold-soft);color:var(--marigold-deep)}
+
+  /* Talent pool */
+  .pool-box{margin-top:22px;border:1px solid var(--line);border-radius:4px;background:var(--card);padding:18px 18px 20px}
+  .pool-intro{display:flex;flex-wrap:wrap;gap:6px 24px;align-items:baseline;justify-content:space-between;margin-bottom:14px}
+  .pool-intro h2{font-family:var(--display);font-weight:400;font-size:23px;margin:0}
+  .pool-intro p{margin:0;font-size:12.5px;color:var(--ink-soft);max-width:62ch}
+  .pool-filters{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:6px}
+  .pool-filters .search{max-width:280px;flex:1 1 200px}
+  .pool-filters select{font:inherit;font-size:13px;padding:8px 10px;border:1px solid var(--line);border-radius:3px;background:var(--card);color:var(--ink);max-width:230px}
+  .pool-match{margin:10px 0 0;padding:10px 14px;background:var(--marigold-soft);border-radius:3px;font-size:13px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+  .pool-match b{color:var(--marigold-deep)}
+  .pool-group{margin-top:22px}
+  .pool-group h3{font-family:var(--display);font-weight:400;font-size:18px;margin:0 0 10px;display:flex;gap:10px;align-items:baseline;border-bottom:1px solid var(--line);padding-bottom:6px}
+  .pool-group h3 span{font-family:var(--ui);font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft)}
+  .pool-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px}
+  .pc{background:var(--paper);border:1px solid var(--line);border-radius:4px;padding:12px 13px;display:flex;flex-direction:column;gap:7px;min-width:0}
+  .pc.hired{opacity:.72}
+  .pc-title{font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+  .pc-title .loc{color:var(--marigold-deep)}
+  .pc-title .loc::before{content:"· ";color:var(--ink-soft)}
+  .pc-sub{font-size:12px;color:var(--ink-soft);line-height:1.4;margin:0}
+  .pc-links{display:flex;gap:10px;flex-wrap:wrap;align-items:center;font-size:12px}
+  .pc-links a{color:var(--accent);font-weight:600}
+  .pc-links .none{color:var(--grey)}
+  .pc-foot{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-top:auto;padding-top:4px;border-top:1px dashed var(--line)}
+  .pc-foot select,.pc-foot button{font:inherit;font-size:11.5px}
+  .pc-foot select{padding:4px 6px;border:1px solid var(--line);border-radius:3px;background:var(--card);max-width:150px}
+  .link-btn{background:none;border:0;padding:2px 0;color:var(--accent);cursor:pointer;text-decoration:underline;text-underline-offset:2px}
+  .tag.ok{background:var(--accent-soft);color:var(--accent-deep)}
+  .tag.warm{background:var(--marigold-soft);color:var(--marigold-deep)}
+  .pool-empty{margin:18px 0 4px;font-family:var(--display);font-style:italic;color:var(--ink-soft)}
+
+  /* New hires */
+  .nh-bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:26px 0 0}
+  .rw td.muted{color:var(--ink-soft);font-weight:400}
+  .rw td .tag{white-space:nowrap}
+  .rw .link-btn{font-weight:600}
+  .card .quiet-link{font-size:12.5px;font-weight:600;color:var(--accent);background:none;border:0;padding:0;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+
   @media (max-width:1040px){
     .ats-shell{grid-template-columns:1fr}
     .rail{border-right:0;border-bottom:1px solid var(--line);flex-direction:row;overflow-x:auto;align-items:stretch;gap:10px}
@@ -599,7 +645,7 @@
       <label class="visually-hidden" for="filter">Filter areas</label>
       <input id="filter" type="search" placeholder="Find an area — POSH, offer letter, gratuity…" autocomplete="off">
     </div>
-    <p class="count" id="count" role="status">7 areas</p>
+    <p class="count" id="count" role="status">8 areas</p>
   </div>
 
   <main class="grid" id="grid">
@@ -625,9 +671,11 @@
           <li>Sourcing, referrals and campus outreach</li>
           <li>Structured interviews with scorecards</li>
           <li>Offer, reference checks, closure</li>
+          <li>A talent pool of everyone who has applied</li>
         </ul>
         <div class="card-foot">
           <p class="live-line" id="ta-line">No roles yet</p>
+          <button class="quiet-link" type="button" data-goto="ats/pool" id="ta-pool-link">Talent pool</button>
           <button class="open-ats" type="button" id="open-ats">
             Open the ATS
             <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M1 6h10M6.5 1.5 11 6l-4.5 4.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -668,6 +716,37 @@
             VVF Orientation
             <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M1 6h10M6.5 1.5 11 6l-4.5 4.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a>
+        </div>
+      </div>
+    </article>
+
+    <article class="card" data-keys="new hires joiners joining start date starters onboarding day one new employee new staff">
+      <div class="art">
+        <svg viewBox="0 0 160 90" fill="none" aria-hidden="true">
+          <rect x="44" y="20" width="72" height="58" rx="5" fill="#FFFCF4" stroke="#16624F" stroke-width="2.2"/>
+          <path d="M44 34h72" stroke="#16624F" stroke-width="2.2"/>
+          <path d="M60 14v12M100 14v12" stroke="#16624F" stroke-width="2.6" stroke-linecap="round"/>
+          <g fill="#E3D9C0"><rect x="54" y="42" width="10" height="8" rx="1.5"/><rect x="75" y="42" width="10" height="8" rx="1.5"/><rect x="54" y="58" width="10" height="8" rx="1.5"/><rect x="75" y="58" width="10" height="8" rx="1.5"/></g>
+          <rect x="96" y="42" width="10" height="8" rx="1.5" fill="#E4A916"/>
+          <circle cx="116" cy="70" r="13" fill="#DEEAE3" stroke="#16624F" stroke-width="2"/>
+          <path d="M110 70.5l4 4 7.5-8" stroke="#16624F" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="card-body">
+        <h3>New Hires</h3>
+        <p class="purpose">Everyone who has said yes, with the day they start — so no one arrives to an empty desk.</p>
+        <ul class="contents">
+          <li>Name, role, location and start date</li>
+          <li>Countdown to day one, then day <em>n</em> of 90</li>
+          <li>Reporting manager for each joiner</li>
+          <li>Filled automatically from the Onboarding bin</li>
+        </ul>
+        <div class="card-foot">
+          <p class="live-line" id="nh-line">No new hires yet</p>
+          <button class="open-ats" type="button" data-goto="newhires">
+            New hires
+            <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M1 6h10M6.5 1.5 11 6l-4.5 4.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
         </div>
       </div>
     </article>
@@ -1024,12 +1103,18 @@
     </div>
   </header>
 
-  <div class="demo-bar" id="demo-bar" hidden>
+  <nav class="ats-tabs" role="tablist" aria-label="Applicant tracker sections">
+    <button class="ats-tab" type="button" role="tab" data-tab="openings" aria-selected="false">Openings 2026–27</button>
+    <button class="ats-tab" type="button" role="tab" data-tab="boards" aria-selected="true">Role boards <span class="n" id="tab-n-boards">0</span></button>
+    <button class="ats-tab" type="button" role="tab" data-tab="pool" aria-selected="false">Talent pool <span class="n" id="tab-n-pool">0</span></button>
+  </nav>
+
+  <div class="demo-bar" id="demo-bar" data-pane="boards" hidden>
     <p><strong>Worked example.</strong> These are invented candidates at <code>example.org</code>, shown so you can see how the bins behave — not real applicants.</p>
     <button class="btn" type="button" id="clear-demo">Back to my roles</button>
   </div>
 
-  <section class="snapshot in-ats" aria-labelledby="open-h">
+  <section class="snapshot in-ats" aria-labelledby="open-h" data-pane="openings" hidden>
     <div class="snapshot-head">
       <h2 id="open-h">Openings, 2026–27</h2>
       <p class="sample-note">From applications to apply@vidhyavidhai.org, as logged in the Hiring Tracker · updated 25 Sep 2026</p>
@@ -1060,7 +1145,7 @@
     </div>
   </section>
 
-  <section class="snapshot in-ats" aria-labelledby="snap-h">
+  <section class="snapshot in-ats" aria-labelledby="snap-h" data-pane="boards">
     <div class="snapshot-head">
       <h2 id="snap-h">Hiring snapshot</h2>
       <p class="sample-note" id="snap-note">Across all role folders.</p>
@@ -1073,7 +1158,7 @@
     </div>
   </section>
 
-  <div class="ats-bar">
+  <div class="ats-bar" data-pane="boards">
     <div class="search">
       <svg class="glass" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="7" cy="7" r="4.6"/><path d="M10.4 10.4 14 14" stroke-linecap="round"/></svg>
       <label class="visually-hidden" for="cand-search">Search candidates</label>
@@ -1087,7 +1172,7 @@
     <button class="btn primary" type="button" id="btn-add">+ Add candidate</button>
   </div>
 
-  <div class="ats-shell">
+  <div class="ats-shell" data-pane="boards">
     <nav class="rail" id="rail" aria-label="Roles"></nav>
     <div class="board-wrap">
       <div class="board-head">
@@ -1099,9 +1184,95 @@
     </div>
   </div>
 
+
+  <section class="pool-box" data-pane="pool" hidden aria-labelledby="pool-h">
+    <div class="pool-intro">
+      <h2 id="pool-h">Talent pool</h2>
+      <p>Everyone who has applied to Vidhya Vidhai, kept after their role closes. Grouped by the job they would fit best, with where they are based, so the right people can be reached when a new role opens. Resumes stay in Google Drive — each profile links to its file.</p>
+    </div>
+    <div class="pool-filters">
+      <div class="search">
+        <svg class="glass" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="7" cy="7" r="4.6"/><path d="M10.4 10.4 14 14" stroke-linecap="round"/></svg>
+        <label class="visually-hidden" for="pool-search">Search the talent pool</label>
+        <input id="pool-search" type="search" placeholder="Search — name, skill, past role…" autocomplete="off">
+      </div>
+      <label class="visually-hidden" for="pool-title">Best-fit title</label>
+      <select id="pool-title"></select>
+      <label class="visually-hidden" for="pool-loc">Location</label>
+      <select id="pool-loc"></select>
+      <label class="visually-hidden" for="pool-match-role">Match to an opening</label>
+      <select id="pool-match-role"></select>
+    </div>
+    <div class="ats-bar" style="margin:12px 0 0">
+      <button class="btn primary" type="button" id="pool-add">+ Add profile</button>
+      <button class="btn" type="button" id="pool-import">Import profiles</button>
+      <button class="btn" type="button" id="pool-export">Copy as CSV</button>
+      <span class="spacer"></span>
+      <button class="btn" type="button" id="pool-emails">Copy emails of those shown</button>
+    </div>
+    <p class="pool-match" id="pool-match-note" hidden></p>
+    <div id="pool-list"></div>
+  </section>
+
   <footer>
     <p>Nine bins per role · drag a card between bins, or use the stage menu on the card</p>
     <p id="storage-note">Saved locally in this browser</p>
+  </footer>
+</div>
+
+<!-- ============ NEW HIRES ============ -->
+<div class="page wide" id="view-newhires" hidden>
+  <header class="ats-head">
+    <div class="brand">
+      <button class="back" type="button" data-goto="dash">
+        <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M11 6H1M5.5 1.5 1 6l4.5 4.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        People &amp; Culture
+      </button>
+      <h1>New <em>Hires</em></h1>
+    </div>
+    <div class="privacy">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M8 1.5 13.5 4v4c0 3.2-2.3 5.6-5.5 6.5C4.8 13.6 2.5 11.2 2.5 8V4z" stroke-linejoin="round"/><path d="M5.8 8.1 7.3 9.6l3-3.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <p><strong>Saved in this browser only.</strong> Like the applicant tracker, names and start dates stay on this device and are never uploaded. Anyone moved to the Onboarding bin in the tracker appears here automatically.</p>
+    </div>
+  </header>
+
+  <section class="snapshot in-ats" aria-label="New hires at a glance">
+    <div class="tiles">
+      <div class="tile"><b id="nh-t-soon">0</b><span>Starting in the next 30 days</span></div>
+      <div class="tile"><b id="nh-t-first90">0</b><span>In their first 90 days</span></div>
+      <div class="tile"><b id="nh-t-nodate">0</b><span>Start date still to confirm</span></div>
+      <div class="tile"><b id="nh-t-all">0</b><span>New hires on file</span></div>
+    </div>
+  </section>
+
+  <div class="nh-bar">
+    <button class="btn primary" type="button" id="nh-add">+ Add new hire</button>
+    <button class="btn" type="button" id="nh-export">Copy as CSV</button>
+  </div>
+
+  <section class="group">
+    <div class="group-head"><h2>Starting soon</h2><span id="nh-up-count">0</span></div>
+    <div class="rw-wrap">
+      <table class="rw">
+        <thead><tr><th>Name</th><th>Role</th><th>Location</th><th>Start date</th><th>Countdown</th><th>Reports to</th><th></th></tr></thead>
+        <tbody id="nh-up"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="group">
+    <div class="group-head"><h2>Joined</h2><span id="nh-in-count">0</span></div>
+    <div class="rw-wrap">
+      <table class="rw">
+        <thead><tr><th>Name</th><th>Role</th><th>Location</th><th>Start date</th><th>Where they are</th><th>Reports to</th><th></th></tr></thead>
+        <tbody id="nh-in"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer>
+    <p>Sorted by start date · the first 90 days follow the Onboarding &amp; Induction plan</p>
+    <p>Saved locally in this browser</p>
   </footer>
 </div>
 
@@ -1607,6 +1778,73 @@
   </form>
 </dialog>
 
+<dialog id="dlg-pool">
+  <form method="dialog" class="dlg" id="form-pool">
+    <h2 id="pool-dlg-title">Add profile</h2>
+    <p class="hint">Best-fit title and location are what the pool is sorted by — pick the job this person would be strongest in, not only the one they applied for.</p>
+    <div class="fields">
+      <div class="field full"><label for="p-name">Full name</label><input id="p-name" required></div>
+      <div class="field"><label for="p-title">Best-fit title</label><input id="p-title" list="pool-titles" placeholder="District Lead"></div>
+      <div class="field"><label for="p-loc">Location</label><input id="p-loc" list="pool-locs" placeholder="Cuddalore"></div>
+      <div class="field"><label for="p-email">Email</label><input id="p-email" type="email" placeholder="name@domain.org"></div>
+      <div class="field"><label for="p-phone">Phone</label><input id="p-phone" autocomplete="off"></div>
+      <div class="field full"><label for="p-resume">Resume link (Google Drive)</label><input id="p-resume" type="url" placeholder="https://drive.google.com/file/d/…"></div>
+      <div class="field"><label for="p-applied-for">Applied for</label><input id="p-applied-for" placeholder="Communication Strategist"></div>
+      <div class="field"><label for="p-applied">First applied</label><input id="p-applied" type="date"></div>
+      <div class="field"><label for="p-status">Status</label><select id="p-status">
+        <option value="available">Open to future roles</option>
+        <option value="hired">Hired at Vidhya Vidhai</option>
+        <option value="dnc">Do not contact</option>
+      </select></div>
+      <div class="field"><label for="p-contacted">Last contacted</label><input id="p-contacted" type="date"></div>
+      <div class="field full"><label for="p-notes">Skills and notes</label><textarea id="p-notes" placeholder="Tamil and English, 4 years field coordination, strong on data…"></textarea></div>
+    </div>
+    <div class="dlg-foot">
+      <button class="btn quiet" type="button" id="pool-delete" hidden>Remove from pool</button>
+      <span class="spacer"></span>
+      <button class="btn" type="button" data-close>Cancel</button>
+      <button class="btn primary" type="submit">Save</button>
+    </div>
+  </form>
+</dialog>
+<datalist id="pool-titles"></datalist>
+<datalist id="pool-locs"></datalist>
+
+<dialog id="dlg-pool-import">
+  <form method="dialog" class="dlg">
+    <h2>Import profiles</h2>
+    <p class="hint">Paste a CSV (for example an export of the Hiring Tracker or the apply@ inbox) or choose a file. It is read in this browser and never uploaded. Recognised columns — <code>name, email, phone, best title, location, resume, applied for, applied, notes</code>. Only <code>name</code> is required. People already in the pool (same email) are updated, not duplicated.</p>
+    <div class="field full"><label for="pi-file">CSV file</label><input id="pi-file" type="file" accept=".csv,text/csv,text/plain"></div>
+    <div class="field full"><label for="pi-text">…or paste here</label><textarea id="pi-text" rows="6" placeholder="name,email,best title,location,resume,applied for,applied&#10;Meera S.,meera@example.org,District Lead,Cuddalore,https://drive.google.com/…,District Lead,2025-11-04"></textarea></div>
+    <div class="report" id="pi-report" hidden></div>
+    <div class="dlg-foot">
+      <span class="spacer"></span>
+      <button class="btn" type="button" data-close>Cancel</button>
+      <button class="btn primary" type="button" id="pi-commit">Import</button>
+    </div>
+  </form>
+</dialog>
+
+<dialog id="dlg-hire">
+  <form method="dialog" class="dlg" id="form-hire">
+    <h2 id="hire-dlg-title">Add new hire</h2>
+    <div class="fields">
+      <div class="field full"><label for="h-name">Full name</label><input id="h-name" required></div>
+      <div class="field"><label for="h-role">Role</label><input id="h-role" list="pool-titles" placeholder="District Lead"></div>
+      <div class="field"><label for="h-loc">Location</label><input id="h-loc" list="pool-locs" placeholder="Sivagangai"></div>
+      <div class="field"><label for="h-start">Start date</label><input id="h-start" type="date"></div>
+      <div class="field"><label for="h-manager">Reports to</label><input id="h-manager" placeholder="Manager's name"></div>
+      <div class="field full"><label for="h-notes">Notes</label><textarea id="h-notes" placeholder="Laptop ordered, buddy assigned, field visit on day three…"></textarea></div>
+    </div>
+    <div class="dlg-foot">
+      <button class="btn quiet" type="button" id="hire-delete" hidden>Remove</button>
+      <span class="spacer"></span>
+      <button class="btn" type="button" data-close>Cancel</button>
+      <button class="btn primary" type="submit">Save</button>
+    </div>
+  </form>
+</dialog>
+
 <dialog id="dlg-csv">
   <div class="dlg">
     <h2>CSV export</h2>
@@ -1692,6 +1930,7 @@
 
   /* ---------------- storage ---------------- */
   function save() {
+    if (typeof syncFromBoard === "function") syncFromBoard();
     try { localStorage.setItem(KEY, JSON.stringify(state)); }
     catch (e) {
       var n = document.getElementById("storage-note");
@@ -2398,7 +2637,7 @@
     renderBoard();
   });
 
-  var VIEWS = ["dash", "ats", "policies", "rewards", "learning", "performance"];
+  var VIEWS = ["dash", "ats", "policies", "rewards", "learning", "performance", "newhires"];
   var ldPersonHandler = null; // set once the learning-register script below runs
   function show(view) {
     VIEWS.forEach(function (v) {
@@ -2434,6 +2673,12 @@
       showLdPerson(decodeURIComponent(h.slice("learning/".length)));
       return;
     }
+    if (h.indexOf("ats/") === 0) {
+      show("ats");
+      setAtsTab(h.slice(4));
+      return;
+    }
+    if (h === "ats") setAtsTab("boards");
     show(VIEWS.indexOf(h) > 0 ? h : "dash");
   }
   window.addEventListener("hashchange", route);
@@ -2793,15 +3038,646 @@
     });
   })();
 
-  function renderAll() { renderTiles(); renderRail(); renderBoard(); syncDemoBar(); }
+  /* ---------------- talent pool + new hires ----------------
+     Both live in this browser only, under their own keys, so the worked example
+     (which replaces the board state) can never wipe them. Every real candidate
+     on a role board is copied into the pool; anyone in the Onboarding bin is
+     added to New Hires. Deleting from either list sticks — the link is kept. */
+  var POOL_KEY = "vv-pool-v1", HIRES_KEY = "vv-hires-v1";
+  var pool = null, hires = null;
+  var poolQuery = "", poolTitle = "", poolLoc = "", poolMatch = "";
+  var poolRevealed = {}, poolFlash = "";
+  var DEFAULT_TITLES = [
+    "District Lead", "Programme Implementation Lead", "Programme Design Lead", "DEEP Lead",
+    "DEEP Coordinator", "Communication Strategist", "Monitoring & Evaluation",
+    "Growth & Partnerships Lead", "People & Culture", "Curriculum Designer", "Teacher",
+    "Finance & Admin", "Intern"
+  ];
+  var STOP = { the: 1, and: 1, of: 1, for: 1, a: 1, an: 1, "": 1 };
+
+  function readKey(k, fallback) {
+    var raw = null;
+    try { raw = localStorage.getItem(k); } catch (e) { raw = null; }
+    if (!raw) return fallback;
+    try { return JSON.parse(raw) || fallback; } catch (e) { return fallback; }
+  }
+  function writeKey(k, v) {
+    try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { /* storage blocked */ }
+  }
+  function loadPool() {
+    var p = readKey(POOL_KEY, null);
+    return (p && p.profiles) ? p : { version: 1, profiles: [], linked: {} };
+  }
+  function loadHires() {
+    var h = readKey(HIRES_KEY, null);
+    return (h && h.list) ? h : { version: 1, list: [], linked: {} };
+  }
+  function savePool() { writeKey(POOL_KEY, pool); }
+  function saveHires() { writeKey(HIRES_KEY, hires); }
+
+  function today() { return new Date().toISOString().slice(0, 10); }
+  function localDate(iso) {
+    var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso || "");
+    return m ? new Date(+m[1], +m[2] - 1, +m[3]) : null;
+  }
+  function fmtDate(iso) {
+    var d = localDate(iso);
+    if (!d) return iso || "";
+    return d.getDate() + " " + ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"][d.getMonth()] + " " + d.getFullYear();
+  }
+  function daysFromToday(iso) {
+    var d = localDate(iso);
+    if (!d) return null;
+    var t = new Date(); t.setHours(0, 0, 0, 0);
+    return Math.round((d - t) / 86400000);
+  }
+  function words(s) {
+    return String(s || "").toLowerCase().split(/[^a-z0-9]+/).filter(function (w) { return !STOP[w]; });
+  }
+  function csvCell(v) {
+    v = String(v == null ? "" : v);
+    return /[",\n]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v;
+  }
+  function roleById(id) { return state.roles.filter(function (r) { return r.id === id; })[0]; }
+  function addAppliedFor(p, title) {
+    if (!title) return;
+    var list = p.appliedFor ? p.appliedFor.split(/\s*;\s*/) : [];
+    if (list.map(norm).indexOf(norm(title)) === -1) list.push(title);
+    p.appliedFor = list.join("; ");
+  }
+  function findProfile(email, name) {
+    var e = String(email || "").toLowerCase();
+    return pool.profiles.filter(function (p) {
+      return e ? String(p.email || "").toLowerCase() === e : (!p.email && norm(p.name) === norm(name));
+    })[0];
+  }
+
+  function syncFromBoard() {
+    if (!state || !pool || !hires || state.demo) return;
+    var poolChanged = false, hiresChanged = false;
+    state.candidates.forEach(function (c) {
+      var role = roleById(c.roleId) || {};
+      var p;
+      if (pool.linked[c.id]) {
+        p = pool.profiles.filter(function (x) { return x.id === pool.linked[c.id]; })[0];
+      } else {
+        p = findProfile(c.email, c.name);
+        if (!p) {
+          p = { id: uid(), name: c.name, email: c.email || "", phone: c.phone || "",
+                title: role.title || "", location: role.location || "", resume: "",
+                appliedFor: "", applied: c.applied || "", status: "available",
+                contacted: "", notes: c.notes || "" };
+          pool.profiles.push(p);
+        }
+        pool.linked[c.id] = p.id;
+        poolChanged = true;
+      }
+      if (p) {
+        var before = p.appliedFor + "|" + p.status + "|" + p.applied;
+        addAppliedFor(p, role.title);
+        if (c.applied && (!p.applied || c.applied < p.applied)) p.applied = c.applied;
+        if (!p.email && c.email) p.email = c.email;
+        if (!p.phone && c.phone) p.phone = c.phone;
+        if (c.stage === "onboarding") p.status = "hired";
+        if (before !== p.appliedFor + "|" + p.status + "|" + p.applied) poolChanged = true;
+      }
+      if (c.stage === "onboarding" && !hires.linked[c.id]) {
+        hires.list.push({ id: uid(), name: c.name, role: role.title || "", location: role.location || "",
+                          start: "", manager: "", notes: "", candId: c.id });
+        hires.linked[c.id] = 1;
+        hiresChanged = true;
+      }
+    });
+    if (poolChanged) savePool();
+    if (hiresChanged) saveHires();
+  }
+
+  /* ---------------- ATS tabs ---------------- */
+  var ATS_TABS = ["openings", "boards", "pool"];
+  var atsTab = "boards";
+  function setAtsTab(tab) {
+    if (ATS_TABS.indexOf(tab) === -1) tab = "boards";
+    atsTab = tab;
+    document.querySelectorAll("#view-ats [data-pane]").forEach(function (el) {
+      el.hidden = el.dataset.pane !== tab || (el.id === "demo-bar" && !state.demo);
+    });
+    document.querySelectorAll("#view-ats .ats-tab").forEach(function (b) {
+      b.setAttribute("aria-selected", b.dataset.tab === tab ? "true" : "false");
+    });
+  }
+  document.querySelectorAll("#view-ats .ats-tab").forEach(function (b) {
+    b.addEventListener("click", function () { location.hash = "#ats/" + b.dataset.tab; });
+  });
+
+  /* ---------------- pool rendering ---------------- */
+  function fillSelect(sel, first, values, current) {
+    sel.textContent = "";
+    var o = document.createElement("option");
+    o.value = ""; o.textContent = first;
+    sel.appendChild(o);
+    values.forEach(function (v) {
+      var opt = document.createElement("option");
+      opt.value = v.value; opt.textContent = v.label;
+      sel.appendChild(opt);
+    });
+    sel.value = values.some(function (v) { return v.value === current; }) ? current : "";
+    return sel.value;
+  }
+  function tally(key) {
+    var n = {};
+    pool.profiles.forEach(function (p) { var k = (p[key] || "").trim(); if (k) n[k] = (n[k] || 0) + 1; });
+    return Object.keys(n).sort(function (a, b) { return a.localeCompare(b); })
+      .map(function (k) { return { value: k, label: k + " (" + n[k] + ")" }; });
+  }
+  function fillDatalists() {
+    var titles = {}, locs = {};
+    DEFAULT_TITLES.forEach(function (t) { titles[t] = 1; });
+    state.roles.forEach(function (r) { if (r.title) titles[r.title] = 1; if (r.location) locs[r.location] = 1; });
+    pool.profiles.forEach(function (p) { if (p.title) titles[p.title] = 1; if (p.location) locs[p.location] = 1; });
+    [["pool-titles", titles], ["pool-locs", locs]].forEach(function (pair) {
+      var dl = document.getElementById(pair[0]);
+      dl.textContent = "";
+      Object.keys(pair[1]).sort().forEach(function (v) {
+        var o = document.createElement("option"); o.value = v; dl.appendChild(o);
+      });
+    });
+  }
+
+  function matchScore(p, role) {
+    var want = words(role.title);
+    var have = words(p.title + " " + p.appliedFor);
+    var hit = want.filter(function (w) { return have.indexOf(w) !== -1; }).length;
+    if (!hit) return 0;
+    var score = hit / want.length * 10;
+    if (norm(p.title) === norm(role.title)) score += 5;
+    if (role.location && norm(p.location) === norm(role.location)) score += 3;
+    return score;
+  }
+
+  function visibleProfiles() {
+    var q = poolQuery.trim().toLowerCase();
+    var list = pool.profiles.filter(function (p) {
+      if (poolTitle && p.title !== poolTitle) return false;
+      if (poolLoc && p.location !== poolLoc) return false;
+      if (!q) return true;
+      return [p.name, p.email, p.title, p.location, p.appliedFor, p.notes].join(" ").toLowerCase().indexOf(q) !== -1;
+    });
+    var role = poolMatch && roleById(poolMatch);
+    if (role) {
+      list = list.filter(function (p) { return p.status === "available"; })
+        .map(function (p) { return { p: p, s: matchScore(p, role) }; })
+        .filter(function (x) { return x.s > 0; })
+        .sort(function (a, b) { return b.s - a.s || a.p.name.localeCompare(b.p.name); })
+        .map(function (x) { return x.p; });
+    }
+    return list;
+  }
+
+  function profileCard(p) {
+    var el = document.createElement("article");
+    el.className = "pc" + (p.status === "hired" ? " hired" : "");
+
+    var t = document.createElement("div");
+    t.className = "pc-title";
+    t.innerHTML = "<span>" + esc(p.title || "Title not set") + "</span>" +
+      (p.location ? '<span class="loc">' + esc(p.location) + "</span>" : "");
+    el.appendChild(t);
+
+    var nameBtn = document.createElement("button");
+    nameBtn.type = "button"; nameBtn.className = "cand-name";
+    nameBtn.textContent = p.name;
+    nameBtn.addEventListener("click", function () { openPoolDialog(p); });
+    el.appendChild(nameBtn);
+
+    var sub = [];
+    if (p.appliedFor) sub.push("Applied for " + p.appliedFor);
+    if (p.applied) sub.push("first applied " + fmtDate(p.applied));
+    if (sub.length) {
+      var s = document.createElement("p"); s.className = "pc-sub"; s.textContent = sub.join(" · ");
+      el.appendChild(s);
+    }
+
+    var links = document.createElement("div");
+    links.className = "pc-links";
+    if (/^https?:\/\//i.test(p.resume || "")) {
+      var a = document.createElement("a");
+      a.href = p.resume; a.target = "_blank"; a.rel = "noopener"; a.textContent = "Resume ↗";
+      links.appendChild(a);
+    } else {
+      var none = document.createElement("span"); none.className = "none"; none.textContent = "No resume linked";
+      links.appendChild(none);
+    }
+    if (p.phone) {
+      var ph = document.createElement("span"); ph.textContent = p.phone; links.appendChild(ph);
+    }
+    el.appendChild(links);
+
+    var mail = document.createElement("div");
+    mail.className = "mail";
+    var code = document.createElement("code");
+    code.textContent = poolRevealed[p.id] ? (p.email || "no email on file") : maskEmail(p.email);
+    mail.appendChild(code);
+    if (p.email) {
+      var eye = document.createElement("button");
+      eye.type = "button"; eye.className = "icon-btn";
+      eye.setAttribute("aria-label", poolRevealed[p.id] ? "Hide email" : "Reveal email");
+      eye.innerHTML = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1.5 8S4 3.5 8 3.5 14.5 8 14.5 8 12 12.5 8 12.5 1.5 8 1.5 8z"/><circle cx="8" cy="8" r="2"/></svg>';
+      eye.addEventListener("click", function () { poolRevealed[p.id] = !poolRevealed[p.id]; renderPool(); });
+      mail.appendChild(eye);
+      var copy = document.createElement("button");
+      copy.type = "button"; copy.className = "icon-btn";
+      copy.setAttribute("aria-label", "Copy email");
+      copy.innerHTML = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5.5" y="5.5" width="8" height="8" rx="1.5"/><path d="M10.5 5.5v-2a1.5 1.5 0 0 0-1.5-1.5H4a1.5 1.5 0 0 0-1.5 1.5V9A1.5 1.5 0 0 0 4 10.5h2"/></svg>';
+      copy.addEventListener("click", function () { copyText(p.email, copy); });
+      mail.appendChild(copy);
+    }
+    el.appendChild(mail);
+
+    var meta = document.createElement("div");
+    meta.className = "cand-meta";
+    if (p.status === "hired") { var h = tag("hired"); h.className = "tag ok"; meta.appendChild(h); }
+    if (p.status === "dnc") { var dn = tag("do not contact"); dn.className = "tag flag"; meta.appendChild(dn); }
+    var since = daysSince(p.contacted);
+    if (since !== null) { var ct = tag(since === 0 ? "contacted today" : "contacted " + since + "d ago"); ct.className = "tag warm"; meta.appendChild(ct); }
+    if (meta.childNodes.length) el.appendChild(meta);
+
+    if (p.status === "available") {
+      var foot = document.createElement("div");
+      foot.className = "pc-foot";
+      if (state.roles.length) {
+        var sel = document.createElement("select");
+        sel.setAttribute("aria-label", "Add " + p.name + " to a role board");
+        var o0 = document.createElement("option"); o0.value = ""; o0.textContent = "Add to a role…";
+        sel.appendChild(o0);
+        state.roles.forEach(function (r) {
+          var o = document.createElement("option"); o.value = r.id;
+          o.textContent = r.title + (r.location ? " — " + r.location : "");
+          sel.appendChild(o);
+        });
+        if (poolMatch) sel.value = poolMatch;
+        foot.appendChild(sel);
+        var go = document.createElement("button");
+        go.type = "button"; go.className = "link-btn"; go.textContent = "Add";
+        go.addEventListener("click", function () { if (sel.value) addToBoard(p, sel.value); });
+        foot.appendChild(go);
+      }
+      var sp = document.createElement("span"); sp.className = "spacer"; foot.appendChild(sp);
+      var mark = document.createElement("button");
+      mark.type = "button"; mark.className = "link-btn"; mark.textContent = "Contacted today";
+      mark.addEventListener("click", function () { p.contacted = today(); savePool(); renderPool(); });
+      foot.appendChild(mark);
+      el.appendChild(foot);
+    }
+    return el;
+  }
+
+  function renderPool() {
+    if (!pool) return;
+    var n = pool.profiles.length;
+    document.getElementById("tab-n-pool").textContent = n;
+    document.getElementById("tab-n-boards").textContent = state.roles.length;
+    document.getElementById("ta-pool-link").textContent = "Talent pool · " + n;
+
+    poolTitle = fillSelect(document.getElementById("pool-title"), "All best-fit titles", tally("title"), poolTitle);
+    poolLoc = fillSelect(document.getElementById("pool-loc"), "All locations", tally("location"), poolLoc);
+    poolMatch = fillSelect(document.getElementById("pool-match-role"), "Match to an opening…",
+      state.roles.map(function (r) { return { value: r.id, label: "Match: " + r.title + (r.location ? " — " + r.location : "") }; }), poolMatch);
+    fillDatalists();
+
+    var list = visibleProfiles();
+    var note = document.getElementById("pool-match-note");
+    var role = poolMatch && roleById(poolMatch);
+    if (role) {
+      note.hidden = false;
+      note.innerHTML = "<span><b>" + list.length + "</b> " + (list.length === 1 ? "person" : "people") +
+        " in the pool could fit <b>" + esc(role.title) + "</b>" + (role.location ? " in " + esc(role.location) : "") +
+        " — closest title and location first. Hired and do-not-contact profiles are left out.</span>";
+      var clear = document.createElement("button");
+      clear.type = "button"; clear.className = "link-btn"; clear.textContent = "Clear match";
+      clear.addEventListener("click", function () { poolMatch = ""; renderPool(); });
+      note.appendChild(clear);
+    } else {
+      note.hidden = true;
+    }
+
+    var wrap = document.getElementById("pool-list");
+    wrap.textContent = "";
+    if (poolFlash) {
+      var f = document.createElement("p"); f.className = "board-hint"; f.style.padding = "12px 0 0";
+      f.textContent = poolFlash; wrap.appendChild(f);
+    }
+    if (!n) {
+      var e = document.createElement("p"); e.className = "pool-empty";
+      e.textContent = "The pool is empty. Everyone you add to a role board lands here automatically — or import past applicants from a CSV.";
+      wrap.appendChild(e);
+      return;
+    }
+    if (!list.length) {
+      var e2 = document.createElement("p"); e2.className = "pool-empty";
+      e2.textContent = role ? "No one in the pool matches this opening yet." : "No one matches those filters.";
+      wrap.appendChild(e2);
+      return;
+    }
+
+    var groups = {}, order = [];
+    if (role) { groups.m = list; order = ["m"]; }
+    else {
+      list.forEach(function (p) {
+        var k = (p.title || "").trim() || "￿";
+        if (!groups[k]) { groups[k] = []; order.push(k); }
+        groups[k].push(p);
+      });
+      order.sort(function (a, b) { return a.localeCompare(b); });
+    }
+    order.forEach(function (k) {
+      var g = document.createElement("section");
+      g.className = "pool-group";
+      var h = document.createElement("h3");
+      h.innerHTML = esc(role ? "Suggested for " + role.title : (k === "￿" ? "Title not set yet" : k)) +
+        " <span>" + groups[k].length + (groups[k].length === 1 ? " profile" : " profiles") + "</span>";
+      g.appendChild(h);
+      var grid = document.createElement("div");
+      grid.className = "pool-grid";
+      groups[k].sort(function (a, b) {
+        return role ? 0 : (a.location || "￿").localeCompare(b.location || "￿") || a.name.localeCompare(b.name);
+      }).forEach(function (p) { grid.appendChild(profileCard(p)); });
+      g.appendChild(grid);
+      wrap.appendChild(g);
+    });
+  }
+
+  function addToBoard(p, roleId) {
+    var role = roleById(roleId);
+    if (!role) return;
+    var already = state.candidates.some(function (c) {
+      return c.roleId === roleId && (p.email ? String(c.email).toLowerCase() === p.email.toLowerCase() : norm(c.name) === norm(p.name));
+    });
+    if (already) { alert(p.name + " is already on the " + role.title + " board."); return; }
+    var c = { id: uid(), roleId: roleId, name: p.name, email: p.email || "", phone: p.phone || "",
+              stage: "new", source: "Talent pool", applied: today(), owner: "", notes: p.notes || "" };
+    state.candidates.push(c);
+    pool.linked[c.id] = p.id;
+    p.contacted = today();
+    savePool();
+    selectedRole = roleId;
+    poolFlash = p.name + " added to New applications on the " + role.title + " board.";
+    save(); renderAll();
+  }
+
+  ["pool-title", "pool-loc", "pool-match-role"].forEach(function (id) {
+    document.getElementById(id).addEventListener("change", function (e) {
+      if (id === "pool-title") poolTitle = e.target.value;
+      if (id === "pool-loc") poolLoc = e.target.value;
+      if (id === "pool-match-role") poolMatch = e.target.value;
+      poolFlash = "";
+      renderPool();
+    });
+  });
+  document.getElementById("pool-search").addEventListener("input", function (e) {
+    poolQuery = e.target.value; poolFlash = ""; renderPool();
+  });
+  document.getElementById("pool-emails").addEventListener("click", function (ev) {
+    var emails = visibleProfiles().filter(function (p) { return p.email && p.status !== "dnc"; })
+      .map(function (p) { return p.email; });
+    var btn = ev.currentTarget;
+    if (!emails.length) { btn.textContent = "No emails in this view"; }
+    else { copyText(emails.join(", "), null); btn.textContent = "Copied " + emails.length + (emails.length === 1 ? " email" : " emails") + " — paste into Bcc"; }
+    setTimeout(function () { btn.textContent = "Copy emails of those shown"; }, 2200);
+  });
+
+  /* ---------------- pool dialog ---------------- */
+  var dlgPool = document.getElementById("dlg-pool");
+  var editingProfile = null;
+  var POOL_FIELDS = { name: "p-name", title: "p-title", location: "p-loc", email: "p-email", phone: "p-phone",
+                      resume: "p-resume", appliedFor: "p-applied-for", applied: "p-applied",
+                      status: "p-status", contacted: "p-contacted", notes: "p-notes" };
+  function openPoolDialog(p) {
+    editingProfile = p;
+    fillDatalists();
+    document.getElementById("pool-dlg-title").textContent = p ? "Edit profile" : "Add profile";
+    Object.keys(POOL_FIELDS).forEach(function (k) {
+      document.getElementById(POOL_FIELDS[k]).value = p ? (p[k] || "") : (k === "status" ? "available" : "");
+    });
+    document.getElementById("pool-delete").hidden = !p;
+    dlgPool.showModal();
+  }
+  document.getElementById("pool-add").addEventListener("click", function () { openPoolDialog(null); });
+  document.getElementById("form-pool").addEventListener("submit", function (ev) {
+    var name = document.getElementById("p-name").value.trim();
+    if (!name) { ev.preventDefault(); return; }
+    var p = editingProfile || { id: uid() };
+    Object.keys(POOL_FIELDS).forEach(function (k) {
+      var v = document.getElementById(POOL_FIELDS[k]).value;
+      p[k] = k === "notes" ? v : v.trim();
+    });
+    if (!editingProfile) {
+      var dupe = p.email && findProfile(p.email, p.name);
+      if (dupe && !confirm(dupe.name + " already has a profile with this email. Add another anyway?")) { ev.preventDefault(); return; }
+      pool.profiles.push(p);
+    }
+    editingProfile = null;
+    poolFlash = "";
+    savePool(); renderPool();
+  });
+  document.getElementById("pool-delete").addEventListener("click", function () {
+    if (!editingProfile) return;
+    if (!confirm("Remove " + editingProfile.name + " from the talent pool? Their role-board card, if any, stays.")) return;
+    var id = editingProfile.id;
+    pool.profiles = pool.profiles.filter(function (p) { return p.id !== id; });
+    editingProfile = null;
+    dlgPool.close();
+    savePool(); renderPool();
+  });
+
+  /* ---------------- pool import / export ---------------- */
+  var dlgPoolImport = document.getElementById("dlg-pool-import");
+  document.getElementById("pool-import").addEventListener("click", function () {
+    document.getElementById("pi-report").hidden = true;
+    dlgPoolImport.showModal();
+  });
+  document.getElementById("pi-file").addEventListener("change", function (ev) {
+    var f = ev.target.files && ev.target.files[0];
+    if (!f) return;
+    var fr = new FileReader();
+    fr.onload = function () { document.getElementById("pi-text").value = String(fr.result || ""); };
+    fr.readAsText(f);
+  });
+  document.getElementById("pi-commit").addEventListener("click", function () {
+    var report = document.getElementById("pi-report");
+    var rows = parseCSV(document.getElementById("pi-text").value || "");
+    function fail(msg) { report.hidden = false; report.innerHTML = '<p class="warn">' + esc(msg) + "</p>"; }
+    if (rows.length < 2) return fail("Need a header row and at least one profile row.");
+    var h = rows[0];
+    var ix = {
+      name: pickCol(h, ["name", "fullname", "candidate", "candidatename", "applicant"]),
+      email: pickCol(h, ["email", "emailaddress", "mail", "emailid"]),
+      phone: pickCol(h, ["phone", "mobile", "contact", "phonenumber", "mobilenumber"]),
+      title: pickCol(h, ["besttitle", "bestfittitle", "bestfit", "title", "jobtitle", "suitablefor", "fitfor", "currentrole", "designation"]),
+      location: pickCol(h, ["location", "city", "district", "basedin", "place", "currentlocation"]),
+      resume: pickCol(h, ["resume", "resumelink", "cv", "cvlink", "resumeurl", "link", "drivelink"]),
+      appliedFor: pickCol(h, ["appliedfor", "role", "position", "roleapplied", "vacancy", "job"]),
+      applied: pickCol(h, ["applied", "appliedon", "date", "applieddate", "firstapplied", "received"]),
+      notes: pickCol(h, ["notes", "note", "skills", "remarks", "comments"])
+    };
+    if (ix.name === -1) return fail("No “name” column found. The header row must include a name column.");
+    var get = function (r, k) { return ix[k] === -1 ? "" : String(r[ix[k]] || "").trim(); };
+    var added = 0, updated = 0, skipped = 0;
+    for (var i = 1; i < rows.length; i++) {
+      var r = rows[i], name = get(r, "name");
+      if (!name) { skipped++; continue; }
+      var email = get(r, "email");
+      var p = findProfile(email, name);
+      var fresh = !p;
+      if (fresh) { p = { id: uid(), name: name, email: email, status: "available", contacted: "", appliedFor: "" }; }
+      ["phone", "title", "location", "resume", "notes"].forEach(function (k) {
+        var v = get(r, k); if (v && (fresh || !p[k])) p[k] = v;
+      });
+      addAppliedFor(p, get(r, "appliedFor"));
+      var ap = get(r, "applied");
+      if (/^\d{4}-\d{2}-\d{2}/.test(ap)) ap = ap.slice(0, 10); else ap = "";
+      if (ap && (!p.applied || ap < p.applied)) p.applied = ap;
+      if (!p.title && get(r, "appliedFor")) p.title = get(r, "appliedFor");
+      if (fresh) { pool.profiles.push(p); added++; } else updated++;
+    }
+    savePool();
+    poolFlash = "Imported " + added + " new " + (added === 1 ? "profile" : "profiles") +
+      (updated ? ", updated " + updated : "") + (skipped ? ", skipped " + skipped + " rows with no name" : "") + ".";
+    document.getElementById("pi-text").value = "";
+    document.getElementById("pi-file").value = "";
+    dlgPoolImport.close();
+    renderPool();
+  });
+  function poolCSV() {
+    var head = ["name", "email", "phone", "best title", "location", "resume", "applied for", "first applied", "status", "last contacted", "notes"];
+    var lines = [head.join(",")];
+    pool.profiles.forEach(function (p) {
+      lines.push([p.name, p.email, p.phone, p.title, p.location, p.resume, p.appliedFor, p.applied,
+                  p.status, p.contacted, p.notes].map(csvCell).join(","));
+    });
+    return lines.join("\n");
+  }
+  document.getElementById("pool-export").addEventListener("click", function (ev) {
+    var btn = ev.currentTarget;
+    copyText(poolCSV(), null);
+    btn.textContent = "Copied " + pool.profiles.length + " profiles";
+    setTimeout(function () { btn.textContent = "Copy as CSV"; }, 1800);
+  });
+
+  /* ---------------- new hires ---------------- */
+  function hireRow(hr, joined) {
+    var tr = document.createElement("tr");
+    var d = daysFromToday(hr.start);
+    var when;
+    if (d === null) when = '<span class="tag flag">confirm start date</span>';
+    else if (!joined) when = d === 0 ? '<span class="tag ok">starts today</span>' : '<span class="tag warm">in ' + d + (d === 1 ? " day" : " days") + "</span>";
+    else when = -d < 90 ? '<span class="tag ok">day ' + (1 - d) + " of 90</span>" : '<span class="tag">settled in</span>';
+    tr.innerHTML = "<td></td><td>" + esc(hr.role) + '</td><td class="muted">' + esc(hr.location) +
+      '</td><td class="num">' + esc(hr.start ? fmtDate(hr.start) : "—") + "</td><td>" + when +
+      '</td><td class="muted">' + esc(hr.manager) + "</td><td></td>";
+    var nb = document.createElement("button");
+    nb.type = "button"; nb.className = "cand-name"; nb.textContent = hr.name;
+    nb.addEventListener("click", function () { openHireDialog(hr); });
+    tr.firstChild.appendChild(nb);
+    var eb = document.createElement("button");
+    eb.type = "button"; eb.className = "link-btn"; eb.textContent = "Edit";
+    eb.addEventListener("click", function () { openHireDialog(hr); });
+    tr.lastChild.appendChild(eb);
+    return tr;
+  }
+  function emptyRow(text) {
+    var tr = document.createElement("tr");
+    tr.innerHTML = '<td colspan="7" class="muted" style="font-weight:400;font-style:italic">' + esc(text) + "</td>";
+    return tr;
+  }
+  function renderHires() {
+    if (!hires) return;
+    var up = [], joined = [], soon = 0, first90 = 0, nodate = 0;
+    hires.list.forEach(function (hr) {
+      var d = daysFromToday(hr.start);
+      if (d === null) { nodate++; up.push(hr); }
+      else if (d >= 0) { up.push(hr); if (d <= 30) soon++; }
+      else { joined.push(hr); if (-d < 90) first90++; }
+    });
+    up.sort(function (a, b) { return (a.start || "0").localeCompare(b.start || "0"); });
+    joined.sort(function (a, b) { return b.start.localeCompare(a.start); });
+
+    document.getElementById("nh-t-soon").textContent = soon;
+    document.getElementById("nh-t-first90").textContent = first90;
+    document.getElementById("nh-t-nodate").textContent = nodate;
+    document.getElementById("nh-t-all").textContent = hires.list.length;
+    document.getElementById("nh-up-count").textContent = up.length + (up.length === 1 ? " joiner" : " joiners");
+    document.getElementById("nh-in-count").textContent = joined.length + " joined";
+
+    var tUp = document.getElementById("nh-up"), tIn = document.getElementById("nh-in");
+    tUp.textContent = ""; tIn.textContent = "";
+    up.forEach(function (hr) { tUp.appendChild(hireRow(hr, false)); });
+    joined.forEach(function (hr) { tIn.appendChild(hireRow(hr, true)); });
+    if (!up.length) tUp.appendChild(emptyRow("No one waiting to start. Add a new hire, or move a candidate to the Onboarding bin."));
+    if (!joined.length) tIn.appendChild(emptyRow("Joiners move here on their start date."));
+
+    var line = document.getElementById("nh-line");
+    if (!hires.list.length) line.textContent = "No new hires yet";
+    else line.textContent = soon + " starting in 30 days · " + first90 + " in first 90";
+  }
+
+  var dlgHire = document.getElementById("dlg-hire");
+  var editingHire = null;
+  var HIRE_FIELDS = { name: "h-name", role: "h-role", location: "h-loc", start: "h-start", manager: "h-manager", notes: "h-notes" };
+  function openHireDialog(hr) {
+    editingHire = hr;
+    fillDatalists();
+    document.getElementById("hire-dlg-title").textContent = hr ? "Edit new hire" : "Add new hire";
+    Object.keys(HIRE_FIELDS).forEach(function (k) {
+      document.getElementById(HIRE_FIELDS[k]).value = hr ? (hr[k] || "") : "";
+    });
+    document.getElementById("hire-delete").hidden = !hr;
+    dlgHire.showModal();
+  }
+  document.getElementById("nh-add").addEventListener("click", function () { openHireDialog(null); });
+  document.getElementById("form-hire").addEventListener("submit", function (ev) {
+    var name = document.getElementById("h-name").value.trim();
+    if (!name) { ev.preventDefault(); return; }
+    var hr = editingHire || { id: uid(), candId: "" };
+    Object.keys(HIRE_FIELDS).forEach(function (k) {
+      var v = document.getElementById(HIRE_FIELDS[k]).value;
+      hr[k] = k === "notes" ? v : v.trim();
+    });
+    if (!editingHire) hires.list.push(hr);
+    editingHire = null;
+    saveHires(); renderHires();
+  });
+  document.getElementById("hire-delete").addEventListener("click", function () {
+    if (!editingHire) return;
+    if (!confirm("Remove " + editingHire.name + " from New Hires?")) return;
+    var id = editingHire.id;
+    hires.list = hires.list.filter(function (x) { return x.id !== id; });
+    editingHire = null;
+    dlgHire.close();
+    saveHires(); renderHires();
+  });
+  document.getElementById("nh-export").addEventListener("click", function (ev) {
+    var btn = ev.currentTarget;
+    var lines = [["name", "role", "location", "start date", "reports to", "notes"].join(",")];
+    hires.list.forEach(function (hr) {
+      lines.push([hr.name, hr.role, hr.location, hr.start, hr.manager, hr.notes].map(csvCell).join(","));
+    });
+    copyText(lines.join("\n"), null);
+    btn.textContent = "Copied";
+    setTimeout(function () { btn.textContent = "Copy as CSV"; }, 1400);
+  });
+
+  function renderAll() { renderTiles(); renderRail(); renderBoard(); syncDemoBar(); renderPool(); renderHires(); }
   function syncDemoBar() {
-    document.getElementById("demo-bar").hidden = !state.demo;
+    setAtsTab(atsTab);
     document.getElementById("btn-demo").hidden = state.demo || state.candidates.length > 0;
   }
 
   /* ---------------- boot ---------------- */
   state = load();
+  pool = loadPool();
+  hires = loadHires();
   selectedRole = state.roles[0] ? state.roles[0].id : null;
+  syncFromBoard();
   renderAll();
   route();
 
