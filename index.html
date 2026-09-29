@@ -645,7 +645,7 @@
       <label class="visually-hidden" for="filter">Filter areas</label>
       <input id="filter" type="search" placeholder="Find an area — POSH, offer letter, gratuity…" autocomplete="off">
     </div>
-    <p class="count" id="count" role="status">8 areas</p>
+    <p class="count" id="count" role="status">7 areas</p>
   </div>
 
   <main class="grid" id="grid">
@@ -716,37 +716,6 @@
             VVF Orientation
             <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M1 6h10M6.5 1.5 11 6l-4.5 4.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a>
-        </div>
-      </div>
-    </article>
-
-    <article class="card" data-keys="new hires joiners joining start date starters onboarding day one new employee new staff">
-      <div class="art">
-        <svg viewBox="0 0 160 90" fill="none" aria-hidden="true">
-          <rect x="44" y="20" width="72" height="58" rx="5" fill="#FFFCF4" stroke="#16624F" stroke-width="2.2"/>
-          <path d="M44 34h72" stroke="#16624F" stroke-width="2.2"/>
-          <path d="M60 14v12M100 14v12" stroke="#16624F" stroke-width="2.6" stroke-linecap="round"/>
-          <g fill="#E3D9C0"><rect x="54" y="42" width="10" height="8" rx="1.5"/><rect x="75" y="42" width="10" height="8" rx="1.5"/><rect x="54" y="58" width="10" height="8" rx="1.5"/><rect x="75" y="58" width="10" height="8" rx="1.5"/></g>
-          <rect x="96" y="42" width="10" height="8" rx="1.5" fill="#E4A916"/>
-          <circle cx="116" cy="70" r="13" fill="#DEEAE3" stroke="#16624F" stroke-width="2"/>
-          <path d="M110 70.5l4 4 7.5-8" stroke="#16624F" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </div>
-      <div class="card-body">
-        <h3>New Hires</h3>
-        <p class="purpose">Everyone who has said yes, with the day they start — so no one arrives to an empty desk.</p>
-        <ul class="contents">
-          <li>Name, role, location and start date</li>
-          <li>Countdown to day one, then day <em>n</em> of 90</li>
-          <li>Reporting manager for each joiner</li>
-          <li>Filled automatically from the Onboarding bin</li>
-        </ul>
-        <div class="card-foot">
-          <p class="live-line" id="nh-line">No new hires yet</p>
-          <button class="open-ats" type="button" data-goto="newhires">
-            New hires
-            <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M1 6h10M6.5 1.5 11 6l-4.5 4.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </button>
         </div>
       </div>
     </article>
@@ -3625,6 +3594,7 @@
     if (!joined.length) tIn.appendChild(emptyRow("Joiners move here on their start date."));
 
     var line = document.getElementById("nh-line");
+    if (!line) return;
     if (!hires.list.length) line.textContent = "No new hires yet";
     else line.textContent = soon + " starting in 30 days · " + first90 + " in first 90";
   }
