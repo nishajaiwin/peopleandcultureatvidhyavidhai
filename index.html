@@ -1813,7 +1813,7 @@
 <dialog id="dlg-pool-import">
   <form method="dialog" class="dlg">
     <h2>Import profiles</h2>
-    <p class="hint">Paste a CSV (for example an export of the Hiring Tracker or the apply@ inbox) or choose a file. It is read in this browser and never uploaded. Recognised columns — <code>name, email, phone, best title, location, resume, applied for, applied, notes</code>. Only <code>name</code> is required. People already in the pool (same email) are updated, not duplicated.</p>
+    <p class="hint">Paste a CSV (for example an export of the Hiring Tracker or the apply@ inbox) or choose a file. It is read in this browser and never uploaded. Recognised columns — <code>name, email, phone, best title, location, resume, applied for, first applied, pool status, last contacted, notes</code>. Only <code>name</code> is required. People already in the pool (same email) are updated from the file, not duplicated. The Talent Pool tab of the VV Talent Pool sheet imports as is.</p>
     <div class="field full"><label for="pi-file">CSV file</label><input id="pi-file" type="file" accept=".csv,text/csv,text/plain"></div>
     <div class="field full"><label for="pi-text">…or paste here</label><textarea id="pi-text" rows="6" placeholder="name,email,best title,location,resume,applied for,applied&#10;Meera S.,meera@example.org,District Lead,Cuddalore,https://drive.google.com/…,District Lead,2025-11-04"></textarea></div>
     <div class="report" id="pi-report" hidden></div>
@@ -3517,8 +3517,12 @@
       resume: pickCol(h, ["resume", "resumelink", "cv", "cvlink", "resumeurl", "link", "drivelink"]),
       appliedFor: pickCol(h, ["appliedfor", "role", "position", "roleapplied", "vacancy", "job"]),
       applied: pickCol(h, ["applied", "appliedon", "date", "applieddate", "firstapplied", "received"]),
-      notes: pickCol(h, ["notes", "note", "skills", "remarks", "comments"])
+      notes: pickCol(h, ["notes", "note", "skills", "remarks", "comments"]),
+      status: pickCol(h, ["poolstatus", "status"]),
+      contacted: pickCol(h, ["lastcontacted", "contacted"])
     };
+    var STATUS_IN = { opentofutureroles: "available", available: "available",
+                      hired: "hired", donotcontact: "dnc", dnc: "dnc" };
     if (ix.name === -1) return fail("No “name” column found. The header row must include a name column.");
     var get = function (r, k) { return ix[k] === -1 ? "" : String(r[ix[k]] || "").trim(); };
     var added = 0, updated = 0, skipped = 0;
@@ -3529,9 +3533,14 @@
       var p = findProfile(email, name);
       var fresh = !p;
       if (fresh) { p = { id: uid(), name: name, email: email, status: "available", contacted: "", appliedFor: "" }; }
+      // The sheet is the source of truth: a filled cell overwrites what this browser holds.
       ["phone", "title", "location", "resume", "notes"].forEach(function (k) {
-        var v = get(r, k); if (v && (fresh || !p[k])) p[k] = v;
+        var v = get(r, k); if (v) p[k] = v;
       });
+      var st = STATUS_IN[norm(get(r, "status"))];
+      if (st) p.status = st;
+      var lc = get(r, "contacted");
+      if (/^\d{4}-\d{2}-\d{2}/.test(lc)) p.contacted = lc.slice(0, 10);
       addAppliedFor(p, get(r, "appliedFor"));
       var ap = get(r, "applied");
       if (/^\d{4}-\d{2}-\d{2}/.test(ap)) ap = ap.slice(0, 10); else ap = "";
