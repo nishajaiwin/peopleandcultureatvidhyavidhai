@@ -9,7 +9,7 @@ Team Handbook. The handbook remains the authority where the two differ.
 The whole site is a single self-contained `index.html` — no build step, no
 dependencies. Edit it and push; GitHub Pages redeploys automatically.
 
-The talent pool is not on this site. The Talent Acquisition card's **Open talent pool** button
+The talent pool is not on this site. The **Talent pool** option in the ATS tabs
 opens the shared, signed-in pool on claude.ai (https://claude.ai/artifact/TaZcH3X5RpgQqXava3pumd),
 so applicant data never sits on this public page.
 
