@@ -9,7 +9,11 @@ Team Handbook. The handbook remains the authority where the two differ.
 The whole site is a single self-contained `index.html` — no build step, no
 dependencies. Edit it and push; GitHub Pages redeploys automatically.
 
-Applicant tracker, talent pool and new-hires data are stored in each viewer's own browser (localStorage).
+The talent pool is not on this site. The Talent Acquisition card's **Open talent pool** button
+opens the shared, signed-in pool on claude.ai (https://claude.ai/artifact/TaZcH3X5RpgQqXava3pumd),
+so applicant data never sits on this public page.
+
+Applicant tracker and new-hires data are stored in each viewer's own browser (localStorage).
 It is never uploaded and is not shared between people or devices.
 
 ## tools/
