@@ -214,6 +214,7 @@
     letter-spacing:.04em;cursor:pointer;display:inline-flex;align-items:center;gap:7px;
     transition:background .2s ease;
   }
+  a.open-ats{text-decoration:none}
   .open-ats:hover{background:var(--accent-deep)}
   .open-ats svg{width:12px;height:12px}
 
@@ -675,7 +676,10 @@
         </ul>
         <div class="card-foot">
           <p class="live-line" id="ta-line">No roles yet</p>
-          <button class="quiet-link" type="button" data-goto="ats/pool" id="ta-pool-link">Talent pool</button>
+          <a class="open-ats" href="https://claude.ai/artifact/TaZcH3X5RpgQqXava3pumd" target="_blank" rel="noopener" title="Opens the shared talent pool on claude.ai — sign in to view">
+            Open talent pool
+            <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M1 6h10M6.5 1.5 11 6l-4.5 4.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
           <button class="open-ats" type="button" id="open-ats">
             Open the ATS
             <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M1 6h10M6.5 1.5 11 6l-4.5 4.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -1075,7 +1079,6 @@
   <nav class="ats-tabs" role="tablist" aria-label="Applicant tracker sections">
     <button class="ats-tab" type="button" role="tab" data-tab="openings" aria-selected="false">Openings 2026–27</button>
     <button class="ats-tab" type="button" role="tab" data-tab="boards" aria-selected="true">Role boards <span class="n" id="tab-n-boards">0</span></button>
-    <button class="ats-tab" type="button" role="tab" data-tab="pool" aria-selected="false">Talent pool <span class="n" id="tab-n-pool">0</span></button>
   </nav>
 
   <div class="demo-bar" id="demo-bar" data-pane="boards" hidden>
@@ -3122,7 +3125,8 @@
   }
 
   /* ---------------- ATS tabs ---------------- */
-  var ATS_TABS = ["openings", "boards", "pool"];
+  // The talent pool lives in the shared claude.ai dashboard; the local pool pane stays hidden.
+  var ATS_TABS = ["openings", "boards"];
   var atsTab = "boards";
   function setAtsTab(tab) {
     if (ATS_TABS.indexOf(tab) === -1) tab = "boards";
@@ -3303,9 +3307,7 @@
   function renderPool() {
     if (!pool) return;
     var n = pool.profiles.length;
-    document.getElementById("tab-n-pool").textContent = n;
     document.getElementById("tab-n-boards").textContent = state.roles.length;
-    document.getElementById("ta-pool-link").textContent = "Talent pool · " + n;
 
     poolTitle = fillSelect(document.getElementById("pool-title"), "All best-fit titles", tally("title"), poolTitle);
     poolLoc = fillSelect(document.getElementById("pool-loc"), "All locations", tally("location"), poolLoc);
