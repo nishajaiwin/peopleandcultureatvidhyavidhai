@@ -14,7 +14,8 @@ opens the shared, signed-in pool on claude.ai (https://claude.ai/artifact/TaZcH3
 so applicant data never sits on this public page.
 
 Applicant tracker, new-hires, L&D and performance-folder data are stored in each viewer's own browser (localStorage).
-The performance employee folders open only after the Performance Review Policy is unlocked.
+The Performance Review Policy is open to everyone. Its employee folders are password-protected
+for Nisha and Karunya only.
 It is never uploaded and is not shared between people or devices.
 
 ## tools/
@@ -27,6 +28,6 @@ Utilities written while building this page. Node stdlib only, no dependencies.
 | `pdftext.js` | Extracts text from a PDF, decoding per-font ToUnicode CMaps and recursing into Form XObjects. Used to read the Team Handbook. |
 | `xlsx.js` | Dumps an unpacked .xlsx to readable rows. |
 | `xlsxlib.js` | Writes a multi-sheet .xlsx (stored-ZIP, inline strings). |
-| `lock-performance.js` | Seals the Performance Review Policy view with a password (AES-256-GCM, PBKDF2). `node tools/lock-performance.js index.html <file holding the password>`. The password is never stored in this repo. |
+| `lock-performance.js` | Sets or changes the password for the Performance employee folders (AES-256-GCM, PBKDF2). `node tools/lock-performance.js index.html <file holding the password>`. The password is never stored in this repo. |
 
 Usage: `node tools/pdftext.js input.pdf output.txt`
