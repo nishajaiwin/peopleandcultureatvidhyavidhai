@@ -13,7 +13,8 @@ The talent pool is not on this site. The **Talent pool** option in the ATS tabs
 opens the shared, signed-in pool on claude.ai (https://claude.ai/artifact/TaZcH3X5RpgQqXava3pumd),
 so applicant data never sits on this public page.
 
-Applicant tracker and new-hires data are stored in each viewer's own browser (localStorage).
+Applicant tracker, new-hires, L&D and performance-folder data are stored in each viewer's own browser (localStorage).
+The performance employee folders open only after the Performance Review Policy is unlocked.
 It is never uploaded and is not shared between people or devices.
 
 ## tools/

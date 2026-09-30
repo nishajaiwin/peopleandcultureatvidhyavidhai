@@ -431,6 +431,11 @@
   .ldp-view-remarks{margin:0;font-size:13px;color:var(--ink);line-height:1.6;white-space:pre-wrap}
   .ldp-view-remarks.ld-nil-text{color:var(--grey);font-style:italic}
 
+  /* Performance: employee folders (open only after the policy is unlocked) */
+  .pm-files-bar{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;justify-content:space-between;background:var(--accent-soft);border:1px solid #BFD6CB;border-radius:3px;padding:12px 16px;margin:4px 0 8px}
+  .pm-files-bar p{margin:0;font-size:13px;color:var(--accent-deep)}
+  .pmp-who{font-size:12.5px;color:var(--ink-soft)}
+
   .board-hint{margin:0;padding:13px 18px 0;font-family:var(--display);font-style:italic;font-size:14.5px;color:var(--ink-soft)}
   .board{display:flex;gap:13px;overflow-x:auto;padding:16px 18px 20px;align-items:flex-start}
 
@@ -1514,6 +1519,13 @@
       <p>The VVF Performance Review Policy book, kept by People &amp; Culture. The source document remains the authority where the two differ.</p>
     </div>
   </header>
+  <div class="pm-files-bar" id="pm-files-bar" hidden>
+    <p><strong>Employee folders</strong> — one file per person for goals, check-ins and reviews.</p>
+    <button class="open-ats" type="button" data-goto="performance/people">
+      Employee folders
+      <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M1 6h10M6.5 1.5 11 6l-4.5 4.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+  </div>
   <section class="pm-lock" id="pm-lock">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="5" y="10.5" width="14" height="10" rx="2"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3" stroke-linecap="round"/></svg>
     <h2>For HR leads only</h2>
@@ -1531,6 +1543,52 @@
     <p>Source: VVF_Performance_Review_Policy document</p>
     <p>A living document — changes are made from time to time</p>
   </footer>
+</div>
+
+<!-- ============ Performance — employee folders ============ -->
+<div class="page wide" id="view-pm-people" hidden>
+  <header class="ats-head">
+    <div class="brand">
+      <button class="back" type="button" data-goto="performance">
+        <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M11 6H1M5.5 1.5 1 6l4.5 4.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Performance Review Policy
+      </button>
+      <h1>Employee <em>folders</em></h1>
+    </div>
+    <div class="source-note">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="7" width="10" height="7" rx="1.5"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke-linecap="round"/></svg>
+      <p>For HR leads only. Saved to this browser only — like Learning &amp; Development, nothing here is uploaded or shared with other devices. The list of people is the same as in Learning &amp; Development.</p>
+    </div>
+  </header>
+
+  <section class="group">
+    <div class="group-head"><h2>Open a file</h2><span id="pm-folder-count">0 people</span></div>
+    <p class="ld-prompt" style="margin-bottom:14px">Select a name to open that person's performance file — goal setting, mid-year check-in, annual review, and any support plan.</p>
+    <div class="ld-folders" id="pm-folders"></div>
+  </section>
+</div>
+
+<!-- ============ Performance — single employee ============ -->
+<div class="page wide" id="view-pm-person" hidden>
+  <header class="ats-head">
+    <div class="brand">
+      <button class="back" type="button" data-goto="performance/people">
+        <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M11 6H1M5.5 1.5 1 6l4.5 4.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Employee folders
+      </button>
+      <h1 id="pmp-name">&nbsp;</h1>
+    </div>
+    <div class="source-note">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="7" width="10" height="7" rx="1.5"/><path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke-linecap="round"/></svg>
+      <p>This person's performance file. For HR leads only, and saved to this browser only.</p>
+    </div>
+  </header>
+
+  <section class="group">
+    <div class="group-head"><h2>Goals, check-ins &amp; reviews</h2><span id="pmp-count">0 logged</span></div>
+    <div class="ldp-entries" id="pmp-entries"></div>
+    <button class="btn" type="button" id="pmp-add">+ Add a review or check-in</button>
+  </section>
 </div>
 
 <!-- ============ REWARDS ============ -->
@@ -2610,8 +2668,10 @@
     renderBoard();
   });
 
-  var VIEWS = ["dash", "ats", "policies", "rewards", "learning", "performance", "newhires"];
+  var VIEWS = ["dash", "ats", "policies", "rewards", "learning", "performance", "newhires", "pm-people", "pm-person"];
   var ldPersonHandler = null; // set once the learning-register script below runs
+  var ldRoster = null;        // likewise: returns the L&D list of people
+  var pmHandler = null;       // set once the performance-folders script below runs
   function show(view) {
     VIEWS.forEach(function (v) {
       document.getElementById("view-" + v).hidden = (v !== view);
@@ -2646,6 +2706,11 @@
       showLdPerson(decodeURIComponent(h.slice("learning/".length)));
       return;
     }
+    if (h.indexOf("performance/") === 0) {
+      if (pmHandler) pmHandler(h.slice("performance/".length));
+      return;
+    }
+    if (h.indexOf("pm-") === 0) h = "performance"; // folder views only open through the lock
     if (h.indexOf("ats/") === 0) {
       show("ats");
       setAtsTab(h.slice(4));
@@ -2975,6 +3040,8 @@
       card.scrollIntoView({ behavior: "smooth", block: "center" });
     });
 
+    ldRoster = function () { return ldState.roster.slice(); };
+
     ldPersonHandler = function (name) {
       if (ldState.roster.indexOf(name) === -1) {
         location.hash = "#learning";
@@ -2986,6 +3053,209 @@
     };
 
     renderFolders();
+  })();
+
+  /* performance: each employee's own file — opens only after the policy is unlocked */
+  (function () {
+    var entriesWrap = document.getElementById("pmp-entries");
+    if (!entriesWrap) return;
+
+    var PM_KEY = "vv-perf-v1";
+    var idSeq = 0;
+    function pmUid() { idSeq++; return "pm" + Date.now().toString(36) + idSeq; }
+
+    function loadPm() {
+      try {
+        var parsed = JSON.parse(localStorage.getItem(PM_KEY));
+        if (parsed && parsed.entries) return parsed;
+      } catch (err) { /* storage blocked or unreadable */ }
+      return { version: 1, entries: {} };
+    }
+    var pmState = loadPm();
+    function savePm() {
+      try { localStorage.setItem(PM_KEY, JSON.stringify(pmState)); } catch (err) { /* storage blocked */ }
+    }
+    function entriesFor(name) {
+      if (!pmState.entries[name]) pmState.entries[name] = [];
+      return pmState.entries[name];
+    }
+    function roster() { return ldRoster ? ldRoster() : []; }
+    function unlocked() { return document.documentElement.dataset.pmOpen === "1"; }
+
+    var STAGES = { goals: "Goal setting", midyear: "Mid-year check-in", annual: "Annual review", support: "Performance support plan" };
+    var STATUS_LABEL = { scheduled: "Scheduled", done: "Done" };
+    var STATUS_CLASS = { scheduled: "applied", done: "done" };
+
+    /* folders */
+    var foldersWrap = document.getElementById("pm-folders");
+    var folderCount = document.getElementById("pm-folder-count");
+    function renderFolders() {
+      foldersWrap.textContent = "";
+      var people = roster();
+      people.forEach(function (name) {
+        var b = document.createElement("button");
+        b.className = "ld-folder";
+        b.type = "button";
+        b.innerHTML = '<svg aria-hidden="true"><use href="#folder-icon"/></svg>' +
+          '<span class="ld-folder-txt"><span class="ld-folder-name"></span><span class="ld-folder-sub"></span></span>';
+        b.querySelector(".ld-folder-name").textContent = name;
+        var n = (pmState.entries[name] || []).length;
+        b.querySelector(".ld-folder-sub").textContent = n === 0 ? "Nothing logged" : (n + (n === 1 ? " entry" : " entries"));
+        b.addEventListener("click", function () {
+          location.hash = "#performance/people/" + encodeURIComponent(name);
+        });
+        foldersWrap.appendChild(b);
+      });
+      folderCount.textContent = people.length + (people.length === 1 ? " person" : " people");
+    }
+
+    /* one person's file */
+    var nameHeading = document.getElementById("pmp-name");
+    var countLabel = document.getElementById("pmp-count");
+    var currentName = null;
+
+    function fieldsHtml() {
+      var stageOpts = Object.keys(STAGES).map(function (k) { return '<option value="' + k + '">' + STAGES[k] + '</option>'; }).join("");
+      return '<div class="fields">' +
+        '<div class="field"><label>Stage</label><select class="pmp-stage"><option value="">Choose…</option>' + stageOpts + '</select></div>' +
+        '<div class="field"><label>Review cycle</label><input type="text" class="pmp-cycle" maxlength="60" placeholder="e.g. April 2026"></div>' +
+        '<div class="field"><label>Reviewer</label><input type="text" class="pmp-reviewer" maxlength="80" placeholder="e.g. Karunya"></div>' +
+        '<div class="field"><label>Status</label><select class="pmp-status">' +
+          '<option value="">Choose…</option><option value="scheduled">Scheduled</option><option value="done">Done</option>' +
+        '</select></div>' +
+        '<div class="field full"><label>Notes</label>' +
+        '<textarea class="pmp-notes" rows="6" placeholder="Goals agreed, what went well, what to work on, actions and dates"></textarea></div>' +
+      '</div>';
+    }
+
+    function viewCard(entry, idx) {
+      var card = document.createElement("div");
+      card.className = "ldp-entry";
+      card.innerHTML =
+        '<div class="ldp-entry-head"><span class="ldp-entry-num">Entry ' + (idx + 1) + '</span>' +
+        '<div class="ldp-entry-actions">' +
+          '<button class="btn pmp-edit" type="button">Edit</button>' +
+          '<button class="ldp-remove" type="button" title="Remove this entry" aria-label="Remove this entry">&times;</button>' +
+        '</div></div>' +
+        '<div class="ldp-view">' +
+          '<h4 class="ldp-view-course"></h4>' +
+          '<div class="ldp-view-meta"></div>' +
+          '<p class="ldp-view-remarks"></p>' +
+        '</div>';
+      card.querySelector(".ldp-view-course").textContent =
+        (STAGES[entry.stage] || "Stage not set") + (entry.cycle ? " — " + entry.cycle : "");
+      var meta = card.querySelector(".ldp-view-meta");
+      meta.innerHTML = entry.status
+        ? '<span class="ld-st ' + STATUS_CLASS[entry.status] + '">' + STATUS_LABEL[entry.status] + '</span>'
+        : '<span class="ld-st none">Not set</span>';
+      if (entry.reviewer) {
+        var who = document.createElement("span");
+        who.className = "pmp-who";
+        who.textContent = "Reviewer: " + entry.reviewer;
+        meta.appendChild(who);
+      }
+      var notesEl = card.querySelector(".ldp-view-remarks");
+      notesEl.textContent = entry.notes || "No notes yet.";
+      if (!entry.notes) notesEl.classList.add("ld-nil-text");
+
+      card.querySelector(".pmp-edit").addEventListener("click", function () {
+        card.replaceWith(editCard(entry, idx, false));
+      });
+      card.querySelector(".ldp-remove").addEventListener("click", function () {
+        if (!confirm("Remove this entry? This cannot be undone.")) return;
+        var list = entriesFor(currentName);
+        var i = list.indexOf(entry);
+        if (i > -1) list.splice(i, 1);
+        savePm();
+        renderEntries();
+      });
+      return card;
+    }
+
+    /* nothing is written to state until Save is clicked */
+    function editCard(entry, idx, isNew) {
+      var card = document.createElement("div");
+      card.className = "ldp-entry is-editing";
+      card.innerHTML =
+        '<div class="ldp-entry-head"><span class="ldp-entry-num">Entry ' + (idx + 1) + '</span></div>' +
+        fieldsHtml() +
+        '<div class="dlg-foot">' +
+          '<button class="btn quiet pmp-cancel" type="button">Cancel</button>' +
+          '<button class="btn primary pmp-save" type="button">Save</button>' +
+        '</div>';
+      card.querySelector(".pmp-stage").value = entry.stage || "";
+      card.querySelector(".pmp-cycle").value = entry.cycle || "";
+      card.querySelector(".pmp-reviewer").value = entry.reviewer || "";
+      card.querySelector(".pmp-status").value = entry.status || "";
+      card.querySelector(".pmp-notes").value = entry.notes || "";
+
+      card.querySelector(".pmp-cancel").addEventListener("click", function () {
+        if (isNew) {
+          card.remove();
+          if (!entriesWrap.querySelector(".ldp-entry")) renderEntries();
+        } else {
+          card.replaceWith(viewCard(entry, idx));
+        }
+      });
+      card.querySelector(".pmp-save").addEventListener("click", function () {
+        entry.stage = card.querySelector(".pmp-stage").value;
+        entry.cycle = card.querySelector(".pmp-cycle").value.trim();
+        entry.reviewer = card.querySelector(".pmp-reviewer").value.trim();
+        entry.status = card.querySelector(".pmp-status").value;
+        entry.notes = card.querySelector(".pmp-notes").value;
+        if (isNew) entriesFor(currentName).push(entry);
+        savePm();
+        renderEntries();
+      });
+      return card;
+    }
+
+    function renderEntries() {
+      var list = entriesFor(currentName);
+      entriesWrap.textContent = "";
+      if (!list.length) {
+        var empty = document.createElement("p");
+        empty.className = "ld-prompt";
+        empty.id = "pmp-empty-msg";
+        empty.textContent = "Nothing logged yet for " + currentName + ". Use the button below to add goal setting, a check-in or a review.";
+        entriesWrap.appendChild(empty);
+      } else {
+        list.forEach(function (entry, idx) { entriesWrap.appendChild(viewCard(entry, idx)); });
+      }
+      countLabel.textContent = list.length + " logged";
+    }
+
+    document.getElementById("pmp-add").addEventListener("click", function () {
+      var list = entriesFor(currentName);
+      var emptyMsg = document.getElementById("pmp-empty-msg");
+      if (emptyMsg) emptyMsg.remove();
+      var card = editCard({ id: pmUid(), stage: "", cycle: "", reviewer: "", status: "", notes: "" }, list.length, true);
+      entriesWrap.appendChild(card);
+      card.querySelector(".pmp-stage").focus();
+      card.scrollIntoView({ behavior: "smooth", block: "center" });
+    });
+
+    /* #performance/people and #performance/people/<name>; locked → the policy's password form */
+    pmHandler = function (sub) {
+      if (!unlocked()) { show("performance"); return; }
+      if (sub === "people") { renderFolders(); show("pm-people"); return; }
+      if (sub.indexOf("people/") === 0) {
+        var name = decodeURIComponent(sub.slice("people/".length));
+        if (roster().indexOf(name) === -1) { location.hash = "#performance/people"; return; }
+        currentName = name;
+        nameHeading.textContent = name;
+        renderEntries();
+        show("pm-person");
+        return;
+      }
+      show("performance");
+    };
+
+    /* the lock script announces a successful unlock */
+    document.addEventListener("pm-unlocked", function () {
+      document.getElementById("pm-files-bar").hidden = false;
+      if (location.hash.indexOf("#performance/") === 0) route();
+    });
   })();
 
   /* dashboard card filter */
@@ -3691,6 +3961,8 @@
       out.innerHTML = new TextDecoder().decode(buf);
       lock.hidden = true;
       try { sessionStorage.setItem("pm-pw", pw); } catch (e) {}
+      document.documentElement.dataset.pmOpen = "1";
+      document.dispatchEvent(new Event("pm-unlocked"));
     });
   }
   document.getElementById("pm-form").addEventListener("submit", function (e) {

@@ -63,6 +63,8 @@ const js = `
       out.innerHTML = new TextDecoder().decode(buf);
       lock.hidden = true;
       try { sessionStorage.setItem("pm-pw", pw); } catch (e) {}
+      document.documentElement.dataset.pmOpen = "1";
+      document.dispatchEvent(new Event("pm-unlocked"));
     });
   }
   document.getElementById("pm-form").addEventListener("submit", function (e) {
